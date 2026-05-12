@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -33,7 +36,7 @@
 
 <?php
 if(isset($_SESSION['email'])){
-  echo'<a href="deconnexion.php" class="btn-connect">Déconnexion</a>';
+  echo'<a href="php/deconnexion.php" class="btn-connect">Déconnexion</a>';
 }
 ?>
 
