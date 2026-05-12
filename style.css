@@ -141,11 +141,6 @@ body {
 
 /* ── FORM PAGES (login + signup) ── */
 
-fieldset {
-  display : none;
-  border-style : none;
-}
-
 .form-page {
   justify-content: center;
 }
@@ -234,6 +229,7 @@ fieldset {
   color: rgba(255,255,255,0.35);
   font-size: 13px;
 }
+
 .form-foot a { color: #a8d832; font-weight: 900; text-decoration: none; }
 .form-foot a:hover { color: #f5c842; }
 
