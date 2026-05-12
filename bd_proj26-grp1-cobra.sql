@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 11 mai 2026 à 15:23
+-- Généré le : mar. 12 mai 2026 à 12:36
 -- Version du serveur : 5.7.24
 -- Version de PHP : 8.3.1
 
@@ -49,14 +49,14 @@ INSERT INTO `score` (`id_user`, `score_max`) VALUES
 CREATE TABLE `user` (
   `id` int(64) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `user_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `password`) VALUES
+INSERT INTO `user` (`id`, `email`, `user_password`) VALUES
 (1, 'email@email', 'mdp'),
 (2, 'email@email2', 'mdp2');
 

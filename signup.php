@@ -60,7 +60,7 @@
       <div class="form-title">COBRA</div>
       <p class="form-hint">Rejoins l'aventure</p>
 
-      <form name="creer_compte" method="post">
+      <form method="post" action="php/ajout.php">
 
       <div class="field">
         <label for="email">Adresse e-mail</label>
@@ -77,9 +77,10 @@
         <label for="terms">J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a></label>
       </div>
 
-      <input Type="submit" name="Creer mon compte" value="Creer mon compte" class="btn-submit">
+      <input Type="submit" name="creer_mon_compte" value="Creer mon compte" class="btn-submit">
 
     </form>
+
 
       <p class="form-foot">
         Déjà un compte ? <a href="login.php">Se connecter</a>

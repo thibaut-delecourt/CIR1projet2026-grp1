@@ -30,7 +30,7 @@
     <div class="form-title">COBRA</div>
     <p class="form-hint">Bienvenue, aventurier</p>
 
-    <form name="connexion" method="post">
+    <form name="connexion" method="post" action="php/connecter.php">
 
       <div class="field">
         <label for="email">Adresse e-mail</label>
