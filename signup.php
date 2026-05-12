@@ -74,8 +74,6 @@
     <path d="M1410,0 Q1390,300 1420,600" stroke="#2d7a35" stroke-width="4" fill="none" opacity="0.4"/>
     <ellipse cx="400"  cy="900" rx="400" ry="70" fill="#163d1a" opacity="0.8"/>
     <ellipse cx="1050" cy="900" rx="500" ry="60" fill="#1a4a1e" opacity="0.7"/>
-    <circle cx="320"  cy="380" r="2.5" fill="#ffe566" opacity="0.5"><animate attributeName="opacity" values="0.5;0.05;0.5" dur="2.3s" repeatCount="indefinite"/></circle>
-    <circle cx="1110" cy="340" r="2"   fill="#ffe566" opacity="0.4"><animate attributeName="opacity" values="0.4;0.05;0.4" dur="3.1s" repeatCount="indefinite"/></circle>
   </svg>
 </div>
 

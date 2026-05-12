@@ -140,6 +140,12 @@ body {
 .card-concepteur .card-label { color: #fde68a; }
 
 /* ── FORM PAGES (login + signup) ── */
+
+fieldset {
+  display : none;
+  border-style : none;
+}
+
 .form-page {
   justify-content: center;
 }
