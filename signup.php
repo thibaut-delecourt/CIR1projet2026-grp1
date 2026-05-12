@@ -118,7 +118,7 @@
     <button class="btn-submit" onclick="handleSignup()">Créer mon compte</button>
 
     <p class="form-foot">
-      Déjà un compte ? <a href="login.html">Se connecter</a>
+      Déjà un compte ? <a href="login.php">Se connecter</a>
     </p>
   </div>
 </main>

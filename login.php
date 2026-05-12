@@ -45,7 +45,7 @@
     <button class="btn-submit" onclick="handleLogin()">Se connecter</button>
 
     <p class="form-foot">
-      Pas encore de compte ? <a href="signup.html">Créer un compte</a>
+      Pas encore de compte ? <a href="signup.php">Créer un compte</a>
     </p>
   </div>
 </main>
