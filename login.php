@@ -23,7 +23,7 @@
     </svg>
   </div>
 
-  <a href="index.html" class="btn-back">← Accueil</a>
+  <a href="index.php" class="btn-back">← Accueil</a>
 
   <main class="page form-page">
     <div class="form-box">

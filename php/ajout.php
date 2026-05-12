@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(isset($_POST["creer_mon_compte"])){
     try{
         require("connexion.php");
@@ -11,16 +12,17 @@ if(isset($_POST["creer_mon_compte"])){
         $tab = array(':email'=>$email, ':user_password'=>$password);
         $req->execute($tab);
 
+        $_SESSION['email'] = $email;
+        // pour recupérer id car on en aura besoin avec le score
+        $_SESSION['id'] = $conn->lastInsertId();
+
         $conn = NULL;
         echo '
         <script>
             alert("Création du compte réussie");
-            window.location.href = "../index.html";
+            window.location.href = "../index.php";
         </script>';
-        /*
-        header("Location: ../index.html");
-        exit();
-        */
+        
     }
     catch(Exception $e){
         echo '

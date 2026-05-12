@@ -31,6 +31,12 @@
 
   <a href="login.php" class="btn-connect">Connexion</a>
 
+<?php
+if(isset($_SESSION['email'])){
+  echo'<a href="deconnexion.php" class="btn-connect">Déconnexion</a>';
+}
+?>
+
   <div class="cards">
     <a href="aventure.html" class="card card-aventure">
       <span class="card-icon">🗺️</span>
