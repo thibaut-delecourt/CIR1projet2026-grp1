@@ -32,11 +32,14 @@ session_start();
   <h1 class="logo">COBRA</h1>
   <p class="logo-sub">Le jeu de l'éveil</p>
 
-  <a href="login.php" class="btn-connect">Connexion</a>
+  
 
 <?php
 if(isset($_SESSION['email'])){
   echo'<a href="php/deconnexion.php" class="btn-connect">Déconnexion</a>';
+}
+else{
+  echo'<a href="login.php" class="btn-connect">Connexion</a>';
 }
 ?>
 
