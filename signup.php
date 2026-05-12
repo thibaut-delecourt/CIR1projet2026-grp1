@@ -54,6 +54,7 @@
   </div>
 
   <a href="login.php" class="btn-back">← Connexion</a>
+  
 
   <main class="page form-page">
     <div class="form-box">
