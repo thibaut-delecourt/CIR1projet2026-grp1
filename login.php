@@ -43,7 +43,7 @@
       </div>
 
 
-      <input Type="submit" name="Se connecter" value="Se connecter" class="btn-submit">
+      <input Type="submit" name="se_connecter" value="Se connecter" class="btn-submit">
 
     </form>
 
