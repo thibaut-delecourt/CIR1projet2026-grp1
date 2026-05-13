@@ -33,11 +33,10 @@
             pointer-events: none;
         }
 
-        .grid-9x9 {
+        .puzzle-grid {
             display: grid;
-            grid-template-columns: repeat(9, 45px);
-            grid-template-rows: repeat(9, 45px);
-            border: 3px solid #123d18;
+            grid-template-columns: repeat(9, 45px) 30px;
+            grid-template-rows: repeat(9, 45px) 30px;
             position: relative;
             z-index: 3;
         }
@@ -49,9 +48,42 @@
             border: 1px solid #123d18;
         }
 
+        .case.fixed {
+            background-color: #4f4f4f;
+        }
+
         .case:hover {
             background-color: #9fea96;
             cursor: pointer;
+        }
+
+        .case.fixed:hover {
+            background-color: #4f4f4f;
+            cursor: default;
+        }
+
+        .row-number {
+            width: 30px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #f5d76e;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .col-number {
+            width: 45px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #f5d76e;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
         }
 
         .leaf {
@@ -112,99 +144,51 @@
         }
 
         @keyframes leafMove1 {
-            0% {
-                transform: rotate(-35deg) translate(0, 0);
-            }
-            50% {
-                transform: rotate(-22deg) translate(8px, -6px);
-            }
-            100% {
-                transform: rotate(-35deg) translate(0, 0);
-            }
+            0% { transform: rotate(-35deg) translate(0, 0); }
+            50% { transform: rotate(-22deg) translate(8px, -6px); }
+            100% { transform: rotate(-35deg) translate(0, 0); }
         }
 
         @keyframes leafMove2 {
-            0% {
-                transform: rotate(35deg) translate(0, 0);
-            }
-            50% {
-                transform: rotate(22deg) translate(-8px, -6px);
-            }
-            100% {
-                transform: rotate(35deg) translate(0, 0);
-            }
+            0% { transform: rotate(35deg) translate(0, 0); }
+            50% { transform: rotate(22deg) translate(-8px, -6px); }
+            100% { transform: rotate(35deg) translate(0, 0); }
         }
 
         @keyframes leafMove3 {
-            0% {
-                transform: rotate(-140deg) translate(0, 0);
-            }
-            50% {
-                transform: rotate(-155deg) translate(7px, 6px);
-            }
-            100% {
-                transform: rotate(-140deg) translate(0, 0);
-            }
+            0% { transform: rotate(-140deg) translate(0, 0); }
+            50% { transform: rotate(-155deg) translate(7px, 6px); }
+            100% { transform: rotate(-140deg) translate(0, 0); }
         }
 
         @keyframes leafMove4 {
-            0% {
-                transform: rotate(140deg) translate(0, 0);
-            }
-            50% {
-                transform: rotate(155deg) translate(-7px, 6px);
-            }
-            100% {
-                transform: rotate(140deg) translate(0, 0);
-            }
+            0% { transform: rotate(140deg) translate(0, 0); }
+            50% { transform: rotate(155deg) translate(-7px, 6px); }
+            100% { transform: rotate(140deg) translate(0, 0); }
         }
 
         @keyframes leafMove5 {
-            0% {
-                transform: rotate(-75deg) translate(0, 0);
-            }
-            50% {
-                transform: rotate(-90deg) translate(-6px, 8px);
-            }
-            100% {
-                transform: rotate(-75deg) translate(0, 0);
-            }
+            0% { transform: rotate(-75deg) translate(0, 0); }
+            50% { transform: rotate(-90deg) translate(-6px, 8px); }
+            100% { transform: rotate(-75deg) translate(0, 0); }
         }
 
         @keyframes leafMove6 {
-            0% {
-                transform: rotate(75deg) translate(0, 0);
-            }
-            50% {
-                transform: rotate(90deg) translate(6px, 8px);
-            }
-            100% {
-                transform: rotate(75deg) translate(0, 0);
-            }
+            0% { transform: rotate(75deg) translate(0, 0); }
+            50% { transform: rotate(90deg) translate(6px, 8px); }
+            100% { transform: rotate(75deg) translate(0, 0); }
         }
 
         @keyframes leafMove7 {
-            0% {
-                transform: rotate(-105deg) translate(0, 0);
-            }
-            50% {
-                transform: rotate(-120deg) translate(-8px, -5px);
-            }
-            100% {
-                transform: rotate(-105deg) translate(0, 0);
-            }
+            0% { transform: rotate(-105deg) translate(0, 0); }
+            50% { transform: rotate(-120deg) translate(-8px, -5px); }
+            100% { transform: rotate(-105deg) translate(0, 0); }
         }
 
         @keyframes leafMove8 {
-            0% {
-                transform: rotate(105deg) translate(0, 0);
-            }
-            50% {
-                transform: rotate(120deg) translate(8px, -5px);
-            }
-            100% {
-                transform: rotate(105deg) translate(0, 0);
-            }
+            0% { transform: rotate(105deg) translate(0, 0); }
+            50% { transform: rotate(120deg) translate(8px, -5px); }
+            100% { transform: rotate(105deg) translate(0, 0); }
         }
     </style>
 </head>
@@ -234,7 +218,7 @@
                 <span class="leaf leaf-7">🍃</span>
                 <span class="leaf leaf-8">🍃</span>
 
-                <div class="grid-9x9" id="grid"></div>
+                <div class="puzzle-grid" id="grid"></div>
             </div>
         </section>
     </main>
@@ -242,10 +226,32 @@
     <script>
         const grid = document.getElementById("grid");
 
-        for (let i = 0; i < 81; i++) {
-            const cell = document.createElement("div");
-            cell.classList.add("case");
-            grid.appendChild(cell);
+        const rowNumbers = [1, 6, 1, 4, 3, 4, 3, 4, 7];
+        const colNumbers = [6, 4, 4, 3, 3, 7, 1, 4, 1];
+
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                const cell = document.createElement("div");
+                cell.classList.add("case");
+
+                if ((row === 0 && col === 0) || (row === 8 && col === 8)) {
+                    cell.classList.add("fixed");
+                }
+
+                grid.appendChild(cell);
+            }
+
+            const rowNumber = document.createElement("div");
+            rowNumber.classList.add("row-number");
+            rowNumber.textContent = rowNumbers[row];
+            grid.appendChild(rowNumber);
+        }
+
+        for (let col = 0; col < 9; col++) {
+            const colNumber = document.createElement("div");
+            colNumber.classList.add("col-number");
+            colNumber.textContent = colNumbers[col];
+            grid.appendChild(colNumber);
         }
     </script>
 </body>
