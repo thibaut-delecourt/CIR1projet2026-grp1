@@ -44,15 +44,15 @@ else{
 ?>
 
   <div class="cards">
-    <a href="aventure.html" class="card card-aventure">
+    <a href="aventure.php" class="card card-aventure">
       <span class="card-icon">🗺️</span>
       <span class="card-label">Aventure</span>
     </a>
-    <a href="infini.html" class="card card-infini">
+    <a href="infini.php" class="card card-infini">
       <span class="card-icon">∞</span>
       <span class="card-label">Infini</span>
     </a>
-    <a href="concepteur.html" class="card card-concepteur">
+    <a href="concepteur.php" class="card card-concepteur">
       <span class="card-icon">✏️</span>
       <span class="card-label">Concepteur</span>
     </a>
