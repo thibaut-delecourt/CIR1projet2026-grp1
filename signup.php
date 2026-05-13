@@ -65,12 +65,12 @@
 
       <div class="field">
         <label for="email">Adresse e-mail</label>
-        <input type="text" id="email" name="email" placeholder="ton@email.com"/>
+        <input type="text" id="email" name="email" placeholder="ton@email.com" required pattern=".*@.*"/>
       </div>
 
       <div class="field">
         <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password" placeholder="••••••••"/>
+        <input type="password" id="password" name="password" placeholder="••••••••" required/>
       </div>
 
       <div class="check-row">
