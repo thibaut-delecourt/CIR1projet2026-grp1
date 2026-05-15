@@ -263,6 +263,7 @@
             cell.addEventListener("click", () => {
                 if (!cell.classList.contains("fixed")) {
                     cell.classList.toggle("selected");
+                    
                 }
             });
         });
@@ -270,25 +271,23 @@
         function parcour_ligne(){
             const tab_row = document.querySelectorAll(".row-number")
             const tab = document.querySelectorAll(".case")
+            console.log(tab)
             let valid = true
             let tab_count = []
             let i = 0
             while (i < 9){
                 let count = 0
                 for(let j = 0; j<9; j++){
-                    console.log(`${tab[i+ j]}`)
-                    if(tab[i+ j].classList.contains("selected") || !tab[i+ j].classList.contains("fixed")){
+                    if(tab[i*9+j].classList.contains("selected") || tab[i*9+ j].classList.contains("fixed")){
                         count += 1
                     }
                 }
-                console.log(`${count},`)
 
                 if (count != parseInt(tab_row[i].textContent)){
                     valid = false
                 }
-                tab_count += [count]
+                tab_count.push(count)
                 i++
-                console.log(`test${i}`)
             }
             return tab_count
         }
