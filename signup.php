@@ -6,7 +6,8 @@
   <title>COBRA — Créer un compte</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Terms checkbox */
+    
+/* Terms checkbox */
     .check-row {
       display: flex;
       align-items: flex-start;
@@ -34,6 +35,7 @@
 
     .check-row label a { color: #a8d832; text-decoration: none; }
     .check-row label a:hover { color: #f5c842; }
+
   </style>
 </head>
 <body>
