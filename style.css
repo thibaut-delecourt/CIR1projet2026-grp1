@@ -280,3 +280,32 @@ body {
   .card-icon { font-size: 52px; }
   .form-box { padding: 36px 24px 28px; }
 }
+
+/* Terms checkbox */
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+    .check-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      accent-color: #f5c842;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+    .check-row label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .check-row label a { color: #a8d832; text-decoration: none; }
+    .check-row label a:hover { color: #f5c842; }
