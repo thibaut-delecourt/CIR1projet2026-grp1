@@ -274,6 +274,15 @@
                         document.querySelectorAll(".row-number")[i].style.color = '#f5d76e'
                     }
                 }
+                let col_count=parcour_col()
+                for(let i=0;i<9;i++){
+                    if(col_count[i]>colNumbers[i]){
+                        document.querySelectorAll(".col-number")[i].style.color = '#ff0000'
+                    }
+                    else{
+                        document.querySelectorAll(".col-number")[i].style.color = '#f5d76e'
+                    }
+                }
             });
         });
 
