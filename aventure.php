@@ -190,6 +190,10 @@
             50% { transform: rotate(120deg) translate(8px, -5px); }
             100% { transform: rotate(105deg) translate(0, 0); }
         }
+        
+        .case.selected {
+    background-color: #f5d76e;
+}
     </style>
 </head>
 
@@ -253,6 +257,17 @@
             colNumber.textContent = colNumbers[col];
             grid.appendChild(colNumber);
         }
+
+        const cells = document.querySelectorAll(".case");
+        cells.forEach((cell) => {
+            cell.addEventListener("click", () => {
+                if (!cell.classList.contains("fixed")) {
+                    cell.classList.toggle("selected");
+                }
+            });
+        });
+
+     
     </script>
 </body>
 </html>

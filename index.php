@@ -7,6 +7,7 @@ session_start();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>COBRA</title>
+     <link rel="icon" type="image/x-icon" href="../images/CobraTeams.ico">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,7 +33,6 @@ session_start();
   <h1 class="logo">COBRA</h1>
   <p class="logo-sub">Le jeu de l'éveil</p>
 
-  
 
 <?php
 if(isset($_SESSION['email'])){

@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `score` (
   `id_user` int(64) NOT NULL,
-  `score_max` int(255) NOT NULL
+  `score_max` int(255) NOT NULL,
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
