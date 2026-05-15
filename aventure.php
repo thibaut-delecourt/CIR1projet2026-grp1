@@ -267,6 +267,30 @@
             });
         });
 
+        function parcour_ligne(){
+            const tab_row = document.querySelectorAll(".row-number")
+            const tab = document.querySelectorAll(".case")
+            let valid = true
+            let i = 0
+            while (i < 9 && valid){
+                let count = 0
+                for(let j = 0; j<9; j++){
+                    console.log(`${tab[i+ j]}`)
+                    if(tab[i+ j].classList.contains("selected")){
+                        count += 1
+                    }
+                }
+                console.log(`${count},`)
+
+                if (count != parseInt(tab_row[i].textContent)){
+                    valid = false
+                }
+                count = 0
+                i++
+                console.log(`test${i}`)
+            }
+            return valid
+        }
      
     </script>
 </body>
