@@ -300,6 +300,29 @@
             }
             return tab_count
         }
+
+        function parcour_col(){
+            const tab_row = document.querySelectorAll(".col-number")
+            const tab = document.querySelectorAll(".case")
+            let valid = true
+            let tab_count = []
+            let i = 0
+            while (i < 9){
+                let count = 0
+                for(let j = 0; j<9; j++){
+                    if(tab[j*9+i].classList.contains("selected") || tab[i*9+ j].classList.contains("fixed")){
+                        count += 1
+                    }
+                }
+
+                if (count != parseInt(tab_row[i].textContent)){
+                    valid = false
+                }
+                tab_count.push(count)
+                i++
+            }
+            return tab_count
+        }
         
         
         console.log(row_count)
