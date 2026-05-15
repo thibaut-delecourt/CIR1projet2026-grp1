@@ -271,12 +271,13 @@
             const tab_row = document.querySelectorAll(".row-number")
             const tab = document.querySelectorAll(".case")
             let valid = true
+            let tab_count = []
             let i = 0
-            while (i < 9 && valid){
+            while (i < 9){
                 let count = 0
                 for(let j = 0; j<9; j++){
                     console.log(`${tab[i+ j]}`)
-                    if(tab[i+ j].classList.contains("selected")){
+                    if(tab[i+ j].classList.contains("selected") || !tab[i+ j].classList.contains("fixed")){
                         count += 1
                     }
                 }
@@ -285,11 +286,11 @@
                 if (count != parseInt(tab_row[i].textContent)){
                     valid = false
                 }
-                count = 0
+                tab_count += [count]
                 i++
                 console.log(`test${i}`)
             }
-            return valid
+            return tab_count
         }
      
     </script>
