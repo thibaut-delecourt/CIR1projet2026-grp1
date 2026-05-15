@@ -265,6 +265,15 @@
                     cell.classList.toggle("selected");
                     
                 }
+                let row_count=parcour_ligne()
+                for(let i=0;i<9;i++){
+                    if(row_count[i]>rowNumbers[i]){
+                        document.querySelectorAll(".row-number")[i].style.color = '#ff0000'
+                    }
+                    else{
+                        document.querySelectorAll(".row-number")[i].style.color = '#f5d76e'
+                    }
+                }
             });
         });
 
@@ -291,7 +300,9 @@
             }
             return tab_count
         }
-     
+        
+        
+        console.log(row_count)
     </script>
 </body>
 </html>
