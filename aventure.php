@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -44,7 +44,7 @@
         .case {
             width: 45px;
             height: 45px;
-            background-color: #b8f5b1;
+            background-color: #1b4d21;
             border: 1px solid #123d18;
         }
 
@@ -60,6 +60,10 @@
         .case.fixed:hover {
             background-color: #4f4f4f;
             cursor: default;
+        }
+
+        .case.selected {
+            background-color: #f5d76e;
         }
 
         .row-number {
@@ -190,10 +194,148 @@
             50% { transform: rotate(120deg) translate(8px, -5px); }
             100% { transform: rotate(105deg) translate(0, 0); }
         }
-        
-        .case.selected {
-    background-color: #f5d76e;
-}
+
+        .victory-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .victory-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .victory-box {
+            position: relative;
+            padding: 45px 65px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #123d18, #1f7a2e, #f5d76e);
+            border: 4px solid #f5d76e;
+            box-shadow:
+                0 0 25px rgba(245, 215, 110, 0.9),
+                0 0 60px rgba(31, 122, 46, 0.9);
+            text-align: center;
+            animation: victoryPop 0.8s ease forwards, victoryGlow 1.8s ease-in-out infinite;
+        }
+
+        .victory-title {
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: #fff6b0;
+            text-shadow:
+                0 0 8px #f5d76e,
+                0 0 18px #f5d76e,
+                0 0 35px #1bff5a;
+            animation: victoryText 1.2s ease-in-out infinite;
+        }
+
+        .victory-subtitle {
+            margin-top: 14px;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .victory-button {
+            margin-top: 28px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 999px;
+            background: #f5d76e;
+            color: #123d18;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #b99b32;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .victory-button:hover {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #b99b32;
+        }
+
+        .confetti {
+            position: fixed;
+            top: -20px;
+            width: 12px;
+            height: 18px;
+            z-index: 1000;
+            animation: confettiFall linear forwards;
+        }
+
+        @keyframes victoryPop {
+            0% {
+                transform: scale(0.3) rotate(-8deg);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.08) rotate(2deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes victoryGlow {
+            0% {
+                box-shadow:
+                    0 0 25px rgba(245, 215, 110, 0.8),
+                    0 0 60px rgba(31, 122, 46, 0.8);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 45px rgba(245, 215, 110, 1),
+                    0 0 90px rgba(31, 255, 90, 1);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 25px rgba(245, 215, 110, 0.8),
+                    0 0 60px rgba(31, 122, 46, 0.8);
+            }
+        }
+
+        @keyframes victoryText {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
@@ -227,18 +369,26 @@
         </section>
     </main>
 
+    <div class="victory-overlay" id="victoryOverlay">
+        <div class="victory-box">
+            <div class="victory-title">VICTOIRE</div>
+            <div class="victory-subtitle">Le serpent relie bien la queue à la tête !</div>
+            <button class="victory-button" onclick="location.reload()">Rejouer</button>
+        </div>
+    </div>
+
     <script>
         const grid = document.getElementById("grid");
 
         const rowNumbers = [1, 6, 1, 4, 3, 4, 3, 4, 7];
         const colNumbers = [6, 4, 4, 3, 3, 7, 1, 4, 1];
 
+        let victoireDejaAffichee = false;
+
         for (let row = 0; row < 9; row++) {
             for (let col = 0; col < 9; col++) {
                 const cell = document.createElement("div");
                 cell.classList.add("case");
-                cell.classList.add(`${row}`);
-                cell.classList.add(`${col}`);
 
                 if ((row === 0 && col === 0) || (row === 8 && col === 8)) {
                     cell.classList.add("fixed");
@@ -261,78 +411,78 @@
         }
 
         const cells = document.querySelectorAll(".case");
+
         cells.forEach((cell) => {
             cell.addEventListener("click", () => {
                 if (!cell.classList.contains("fixed")) {
                     cell.classList.toggle("selected");
-                    
                 }
-                let row_count=parcour_ligne()
-                for(let i=0;i<9;i++){
-                    if(row_count[i]>rowNumbers[i]){
-                        document.querySelectorAll(".row-number")[i].style.color = '#ff0000'
-                    }
-                    else{
-                        document.querySelectorAll(".row-number")[i].style.color = '#f5d76e'
+
+                let row_count = parcour_ligne();
+
+                for (let i = 0; i < 9; i++) {
+                    if (row_count[i] > rowNumbers[i]) {
+                        document.querySelectorAll(".row-number")[i].style.color = "#ff0000";
+                    } else {
+                        document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
                     }
                 }
-                let col_count=parcour_col()
-                for(let i=0;i<9;i++){
-                    if(col_count[i]>colNumbers[i]){
-                        document.querySelectorAll(".col-number")[i].style.color = '#ff0000'
+
+                let col_count = parcour_col();
+
+                for (let i = 0; i < 9; i++) {
+                    if (col_count[i] > colNumbers[i]) {
+                        document.querySelectorAll(".col-number")[i].style.color = "#ff0000";
+                    } else {
+                        document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
                     }
-                    else{
-                        document.querySelectorAll(".col-number")[i].style.color = '#f5d76e'
-                    }
+                }
+
+                if (verifierParcours()) {
+                    afficherVictoire();
                 }
             });
         });
 
-        function parcour_ligne(){
-            const tab_row = document.querySelectorAll(".row-number")
-            const tab = document.querySelectorAll(".case")
-            console.log(tab)
-            let valid = true
-            let tab_count = []
-            let i = 0
-            while (i < 9){
-                let count = 0
-                for(let j = 0; j<9; j++){
-                    if(tab[i*9+j].classList.contains("selected") || tab[i*9+ j].classList.contains("fixed")){
-                        count += 1
+        function parcour_ligne() {
+            const tab = document.querySelectorAll(".case");
+            let tab_count = [];
+
+            for (let i = 0; i < 9; i++) {
+                let count = 0;
+
+                for (let j = 0; j < 9; j++) {
+                    if (
+                        tab[i * 9 + j].classList.contains("selected") ||
+                        tab[i * 9 + j].classList.contains("fixed")
+                    ) {
+                        count += 1;
                     }
                 }
 
-                if (count != parseInt(tab_row[i].textContent)){
-                    valid = false
-                }
-                tab_count.push(count)
-                i++
+                tab_count.push(count);
             }
-            return tab_count
+
+            return tab_count;
         }
 
-        function parcour_col(){
-            const tab_row = document.querySelectorAll(".col-number")
-            const tab = document.querySelectorAll(".case")
-            let valid = true
-            let tab_count = []
-            let i = 0
-            while (i < 9){
-                let count = 0
-                for(let j = 0; j<9; j++){
+        function parcour_col() {
+            const tab = document.querySelectorAll(".case");
+            let tab_count = [];
+
+            for (let i = 0; i < 9; i++) {
+                let count = 0;
+
+                for (let j = 0; j < 9; j++) {
                     if(tab[j*9+i].classList.contains("selected") || tab[j*9+ i].classList.contains("fixed")){
-                        count += 1
+                        count += 1;
                     }
                 }
 
-                if (count != parseInt(tab_row[i].textContent)){
-                    valid = false
-                }
-                tab_count.push(count)
-                i++
+                tab_count.push(count);
             }
-            return tab_count
+
+            return tab_count;
         }
 
         function verif_case(){
@@ -385,7 +535,152 @@
             }
             return true
         }
-        console.log(row_count)
+
+        function verifierParcours() {
+            const tab = document.querySelectorAll(".case");
+
+            const startIndex = 0;
+            const endIndex = 80;
+
+            function estCaseChemin(index) {
+                return tab[index].classList.contains("selected") ||
+                       tab[index].classList.contains("fixed");
+            }
+
+            function getVoisins(index) {
+                const row = Math.floor(index / 9);
+                const col = index % 9;
+
+                const voisins = [];
+
+                if (row > 0) {
+                    voisins.push((row - 1) * 9 + col);
+                }
+
+                if (row < 8) {
+                    voisins.push((row + 1) * 9 + col);
+                }
+
+                if (col > 0) {
+                    voisins.push(row * 9 + (col - 1));
+                }
+
+                if (col < 8) {
+                    voisins.push(row * 9 + (col + 1));
+                }
+
+                return voisins;
+            }
+
+            const rowCount = parcour_ligne();
+
+            for (let i = 0; i < 9; i++) {
+                if (rowCount[i] !== rowNumbers[i]) {
+                    return false;
+                }
+            }
+
+            const colCount = parcour_col();
+
+            for (let i = 0; i < 9; i++) {
+                if (colCount[i] !== colNumbers[i]) {
+                    return false;
+                }
+            }
+
+            if (!estCaseChemin(startIndex) || !estCaseChemin(endIndex)) {
+                return false;
+            }
+
+            const visited = new Set();
+            const stack = [startIndex];
+
+            while (stack.length > 0) {
+                const current = stack.pop();
+
+                if (!visited.has(current)) {
+                    visited.add(current);
+
+                    const voisins = getVoisins(current);
+
+                    for (let voisin of voisins) {
+                        if (estCaseChemin(voisin) && !visited.has(voisin)) {
+                            stack.push(voisin);
+                        }
+                    }
+                }
+            }
+
+            if (!visited.has(endIndex)) {
+                return false;
+            }
+
+            for (let i = 0; i < tab.length; i++) {
+                if (estCaseChemin(i) && !visited.has(i)) {
+                    return false;
+                }
+            }
+
+            for (let i = 0; i < tab.length; i++) {
+                if (estCaseChemin(i)) {
+                    let nbVoisinsChemin = 0;
+
+                    const voisins = getVoisins(i);
+
+                    for (let voisin of voisins) {
+                        if (estCaseChemin(voisin)) {
+                            nbVoisinsChemin++;
+                        }
+                    }
+
+                    if (i === startIndex || i === endIndex) {
+                        if (nbVoisinsChemin !== 1) {
+                            return false;
+                        }
+                    } else {
+                        if (nbVoisinsChemin !== 2) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        function afficherVictoire() {
+            if (victoireDejaAffichee) {
+                return;
+            }
+
+            victoireDejaAffichee = true;
+
+            const victoryOverlay = document.getElementById("victoryOverlay");
+            victoryOverlay.classList.add("show");
+
+            lancerConfettis();
+        }
+
+        function lancerConfettis() {
+            const couleurs = ["#f5d76e", "#1bff5a", "#ffffff", "#9fea96", "#ffdd57"];
+
+            for (let i = 0; i < 90; i++) {
+                const confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.backgroundColor = couleurs[Math.floor(Math.random() * couleurs.length)];
+                confetti.style.animationDuration = 2.5 + Math.random() * 2.5 + "s";
+                confetti.style.animationDelay = Math.random() * 0.6 + "s";
+                confetti.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5500);
+            }
+        }
     </script>
 </body>
 </html>
