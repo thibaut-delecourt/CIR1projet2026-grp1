@@ -44,7 +44,7 @@
         .case {
             width: 45px;
             height: 45px;
-            background-color: #1b4d21;
+            background-color: #b8f5b1;
             border: 1px solid #123d18;
         }
 
@@ -237,7 +237,9 @@
             for (let col = 0; col < 9; col++) {
                 const cell = document.createElement("div");
                 cell.classList.add("case");
-
+                cell.classList.add(`${row}`);
+                cell.classList.add(`${col}`);
+                
                 if ((row === 0 && col === 0) || (row === 8 && col === 8)) {
                     cell.classList.add("fixed");
                 }
@@ -332,8 +334,6 @@
             }
             return tab_count
         }
-        
-        
         console.log(row_count)
     </script>
 </body>
