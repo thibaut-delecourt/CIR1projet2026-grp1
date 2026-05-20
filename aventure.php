@@ -44,7 +44,7 @@
         .case {
             width: 45px;
             height: 45px;
-            background-color: #b8f5b1;
+            background-color: #1b4d21;
             border: 1px solid #123d18;
         }
 
