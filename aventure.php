@@ -321,7 +321,7 @@
             while (i < 9){
                 let count = 0
                 for(let j = 0; j<9; j++){
-                    if(tab[j*9+i].classList.contains("selected") || tab[i*9+ j].classList.contains("fixed")){
+                    if(tab[j*9+i].classList.contains("selected") || tab[j*9+ i].classList.contains("fixed")){
                         count += 1
                     }
                 }
