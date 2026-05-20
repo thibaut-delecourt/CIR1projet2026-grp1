@@ -603,12 +603,21 @@
         }
 
         const cells = document.querySelectorAll(".case");
-
+        let prev_2 = [-1, -1]
+        let prev_1 = [0, 0]
         cells.forEach((cell) => {
             cell.addEventListener("click", () => {
                 if (!cell.classList.contains("fixed")) {
                     cell.classList.toggle("selected");
                 }
+                let x = parseInt(cell.classList[1], 10)
+                let y = parseInt(cell.classList[2], 10)
+                if(cell.classList.length == 3){
+                    y = x
+                }
+                console.log(verif_case(x, y, prev_1, prev_2))
+                prev_2 = prev_1
+                prev_1 = [cell.classList[1], cell.classList[2]]
 
                 let row_count = parcour_ligne();
 
@@ -678,6 +687,51 @@
             }
 
             return tab_count;
+        }
+
+        function verif_case(x, y, prev_1, prev_2){
+            const tab = document.querySelectorAll(".case")
+            let tab_2 = Array.from({ length: 9 }, i => Array.from({ length: 9 }, j => 0));
+            for (let i =0; i < 9; i++){
+                for(let j = 0; j<9; j++){
+                    tab_2[i][j] = tab[i*9 +j]
+                }
+            }
+            let prev_1_trouver = false
+            let j = y
+            let i = x
+            let x_p_1 = prev_1[0]
+            let y_p_1 = prev_1[1]
+            let x_p_2 = prev_2[0]
+            let y_p_2 = prev_2[1]
+            if (j<tab_2.length-1 && (i == x_p_1 && j+1 == y_p_1)){
+                prev_1_trouver = true
+            }
+            if (j<tab_2.length-1 && (tab_2[i][j+1].classList.contains("selected") || tab_2[i][j+1].classList.contains("fixed")) && ((i != x_p_1 || j+1 != y_p_1) && (i != x_p_2 || j+1 != y_p_2))){
+                return false
+            }
+            if (i<tab_2.length-1 && (tab_2[i+1][j].classList.contains("selected") || tab_2[i+1][j].classList.contains("fixed")) && ((i+1 != x_p_1 || j != y_p_1) && (i+1 != x_p_2 || j != y_p_2))){
+                return false
+            }
+            if ((j<tab_2.length-1 && i<tab_2.length-1) && (tab_2[i+1][j+1].classList.contains("selected") || tab_2[i+1][j+1].classList.contains("fixed"))&& ((i+1 != x_p_1 || j+1 != y_p_1) && (i+1 != x_p_2 || j+1 != y_p_2))){
+                return false 
+            }
+            if (j>0 && (tab_2[i][j-1].classList.contains("selected") || tab_2[i][j-1].classList.contains("fixed"))&& ((i != x_p_1 || j-1 != y_p_1) && (i != x_p_2 || j-1 != y_p_2))){
+                return false 
+            }
+            if (i>0 && (tab_2[i-1][j].classList.contains("selected") || tab_2[i-1][j].classList.contains("fixed")) && ((i-1 != x_p_1 || j != y_p_1) && (i-1 != x_p_2 || j != y_p_2))){
+                return false 
+            }
+            if ((j>0 && i>0) && (tab_2[i-1][j-1].classList.contains("selected") || tab_2[i-1][j-1].classList.contains("fixed"))&& ((i-1 != x_p_1 || j-1 != y_p_1) && (i-1 != x_p_2 || j-1 != y_p_2))){
+                return false 
+            }
+            if ((j<tab_2.length-1 && i>0) && (tab_2[i-1][j+1].classList.contains("selected") || tab_2[i-1][j+1].classList.contains("fixed"))&& ((i-1 != x_p_1 || j+1 != y_p_1) && (i-1 != x_p_2 || j+1 != y_p_2))){
+                return false 
+            }
+            if ((i<tab_2.length-1 && j>0) && (tab_2[i+1][j-1].classList.contains("selected") || tab_2[i+1][j-1].classList.contains("fixed"))&& ((i+1 != x_p_1 || j-1 != y_p_1) && (i+1 != x_p_2 || j-1 != y_p_2))){
+                return false
+            }               
+            return true
         }
 
         function verifierParcours() {
