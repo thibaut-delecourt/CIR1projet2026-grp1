@@ -610,14 +610,19 @@
                 if (!cell.classList.contains("fixed")) {
                     cell.classList.toggle("selected");
                 }
-                let x = parseInt(cell.classList[1], 10)
-                let y = parseInt(cell.classList[2], 10)
-                if(cell.classList.length == 3){
-                    y = x
-                }
-                console.log(verif_case(x, y, prev_1, prev_2))
-                prev_2 = prev_1
-                prev_1 = [cell.classList[1], cell.classList[2]]
+                if (cell.classList.contains("selected")){
+                    let x = parseInt(cell.classList[1], 10)
+                    let y = parseInt(cell.classList[2], 10)
+                    if(cell.classList.length == 3){
+                        y = x
+                    }
+                    let bool = verif_case(x, y, prev_1, prev_2)
+                    console.log(bool)
+                    if (bool){
+                        prev_2 = prev_1
+                        prev_1 = [x, y]
+                    }    
+                } 
 
                 let row_count = parcour_ligne();
 
