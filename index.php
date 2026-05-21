@@ -56,7 +56,8 @@ else{
   echo'<a href="login.php" class="btn-connect">Connexion</a>';
 }
 ?>
-
+  <a href="rules.php" class="btn-rules-top">📜 Règles</a>
+  
   <div class="cards">
     <a href="aventure.php" class="card card-aventure">
       <span class="card-icon">🗺️</span>
