@@ -520,9 +520,7 @@
                         else{
                             tab.push([x,y])
                         }
-                        if (verifierParcours()) {
-                            afficherVictoire();
-                        }  
+                        
                     }
                     else{
                         while((tab.at(-1)[0] != x) || (tab.at(-1)[1] != y)){
@@ -543,6 +541,14 @@
                         }
                     }
 
+                    let correct_row=0
+
+                    for (let i = 0; i < 9; i++) {
+                        if (row_count[i] === rowNumbers[i]) {
+                            correct_row +=1
+                        } 
+                    }
+
                     let col_count = parcour_col();
                     for (let i = 0; i < 9; i++) {
                         if (col_count[i] > colNumbers[i]) {
@@ -550,6 +556,17 @@
                         } else {
                             document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
                         }
+                    }
+
+                    let correct_col=0
+
+                    for (let i = 0; i < 9; i++) {
+                        if (col_count[i] === colNumbers[i]) {
+                            correct_col +=1
+                        } 
+                    }
+                    if(correct_col===correct_row===9){
+                        afficherVictoire()
                     }
                 }
             });
