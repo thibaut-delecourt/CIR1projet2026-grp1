@@ -57,6 +57,11 @@ else{
       <span class="card-label">Concepteur</span>
     </a>
   </div>
+  <a href="touches.php" class="card card-touches">
+      <span class="card-icon">⌨️​</span>
+      <span class="card-label">Touches</span>
+    </a>
+  </div>
 </main>
 
 
