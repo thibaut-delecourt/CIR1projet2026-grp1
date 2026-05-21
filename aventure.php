@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COBRA — Aventure</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 
     <style>
         body {
@@ -232,137 +232,6 @@
             100% { transform: rotate(105deg) translate(0, 0); }
         }
 
-        /* Brume légère animée */
-        .jungle-mist {
-            position: absolute;
-            z-index: 2;
-            width: 900px;
-            height: 180px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(220, 255, 220, 0.20), transparent 70%);
-            filter: blur(18px);
-            opacity: 0.35;
-        }
-
-        .mist-1 {
-            bottom: 80px;
-            left: -250px;
-            animation: mistMove1 18s linear infinite;
-        }
-
-        .mist-2 {
-            bottom: 210px;
-            right: -300px;
-            animation: mistMove2 22s linear infinite;
-        }
-
-        @keyframes mistMove1 {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(600px);
-            }
-        }
-
-        @keyframes mistMove2 {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-650px);
-            }
-        }
-
-        /* Lucioles */
-        .firefly {
-            position: absolute;
-            z-index: 3;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #fff6a8;
-            box-shadow:
-                0 0 8px #fff6a8,
-                0 0 18px #f5d76e,
-                0 0 28px #c9ff7a;
-            opacity: 0.8;
-        }
-
-        .firefly-1 {
-            top: 25%;
-            left: 18%;
-            animation: fireflyMove1 7s ease-in-out infinite;
-        }
-
-        .firefly-2 {
-            top: 42%;
-            left: 78%;
-            animation: fireflyMove2 8s ease-in-out infinite;
-        }
-
-        .firefly-3 {
-            top: 65%;
-            left: 35%;
-            animation: fireflyMove3 9s ease-in-out infinite;
-        }
-
-        .firefly-4 {
-            top: 18%;
-            left: 60%;
-            animation: fireflyMove4 6.5s ease-in-out infinite;
-        }
-
-        .firefly-5 {
-            top: 72%;
-            left: 82%;
-            animation: fireflyMove5 8.5s ease-in-out infinite;
-        }
-
-        .firefly-6 {
-            top: 50%;
-            left: 10%;
-            animation: fireflyMove6 7.5s ease-in-out infinite;
-        }
-
-        @keyframes fireflyMove1 {
-            0% { transform: translate(0, 0); opacity: 0.2; }
-            50% { transform: translate(45px, -35px); opacity: 1; }
-            100% { transform: translate(0, 0); opacity: 0.2; }
-        }
-
-        @keyframes fireflyMove2 {
-            0% { transform: translate(0, 0); opacity: 0.3; }
-            50% { transform: translate(-50px, 30px); opacity: 1; }
-            100% { transform: translate(0, 0); opacity: 0.3; }
-        }
-
-        @keyframes fireflyMove3 {
-            0% { transform: translate(0, 0); opacity: 0.4; }
-            50% { transform: translate(35px, 40px); opacity: 1; }
-            100% { transform: translate(0, 0); opacity: 0.4; }
-        }
-
-        @keyframes fireflyMove4 {
-            0% { transform: translate(0, 0); opacity: 0.25; }
-            50% { transform: translate(-30px, -45px); opacity: 1; }
-            100% { transform: translate(0, 0); opacity: 0.25; }
-        }
-
-        @keyframes fireflyMove5 {
-            0% { transform: translate(0, 0); opacity: 0.2; }
-            50% { transform: translate(-60px, -20px); opacity: 1; }
-            100% { transform: translate(0, 0); opacity: 0.2; }
-        }
-
-        @keyframes fireflyMove6 {
-            0% { transform: translate(0, 0); opacity: 0.3; }
-            50% { transform: translate(55px, 25px); opacity: 1; }
-            100% { transform: translate(0, 0); opacity: 0.3; }
-        }
-
         .victory-overlay {
             position: fixed;
             inset: 0;
@@ -531,7 +400,9 @@
             <ellipse cx="400"  cy="900" rx="400" ry="70" fill="#163d1a" opacity="0.8"/>
             <ellipse cx="1050" cy="900" rx="500" ry="60" fill="#1a4a1e" opacity="0.7"/>
         </svg>
+    </div>
 
+    <div class="jungle-effects">
         <div class="jungle-mist mist-1"></div>
         <div class="jungle-mist mist-2"></div>
 
@@ -544,7 +415,7 @@
             <span class="firefly firefly-6"></span>
         </div>
     </div>
-    
+
     <a href="index.php" class="btn-back">← Accueil</a>
 
     <main class="page">

@@ -14,8 +14,9 @@ body {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: radial-gradient(ellipse at 50% 0%, #1b5e20 0%, #0d2b0f 65%);
   overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(circle at top, #123d18 0%, #061b0d 60%, #020802 100%);
 }
 
 .bg svg {
@@ -279,4 +280,220 @@ body {
   .card:hover { transform: translateX(6px); }
   .card-icon { font-size: 52px; }
   .form-box { padding: 36px 24px 28px; }
+}
+
+/* ───────────────────────────── */
+/* EFFETS COMMUNS : BRUME + LUCIOLES */
+/* ───────────────────────────── */
+
+.jungle-effects {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Brume légère animée */
+.jungle-mist {
+    position: absolute ;
+    width: 900px ;
+    height: 180px ;
+    border-radius: 50% ;
+    background: radial-gradient(circle, rgba(220, 255, 220, 0.20), transparent 70%);
+    filter: blur(18px) ;
+    opacity: 0.35 ;
+    pointer-events: none;
+}
+
+.mist-1 {
+    bottom: 80px;
+    left: -250px;
+    animation: mistMove1 18s linear infinite;
+}
+
+.mist-2 {
+    bottom: 210px;
+    right: -300px;
+    animation: mistMove2 22s linear infinite;
+}
+
+@keyframes mistMove1 {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(600px);
+    }
+}
+
+@keyframes mistMove2 {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-650px);
+    }
+}
+
+/* Lucioles */
+.fireflies {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.firefly {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff6a8;
+    box-shadow:
+        0 0 8px #fff6a8,
+        0 0 18px #f5d76e,
+        0 0 28px #c9ff7a;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.firefly-1 {
+    top: 25%;
+    left: 18%;
+    animation: fireflyMove1 7s ease-in-out infinite;
+}
+
+.firefly-2 {
+    top: 42%;
+    left: 78%;
+    animation: fireflyMove2 8s ease-in-out infinite;
+}
+
+.firefly-3 {
+    top: 65%;
+    left: 35%;
+    animation: fireflyMove3 9s ease-in-out infinite;
+}
+
+.firefly-4 {
+    top: 18%;
+    left: 60%;
+    animation: fireflyMove4 6.5s ease-in-out infinite;
+}
+
+.firefly-5 {
+    top: 72%;
+    left: 82%;
+    animation: fireflyMove5 8.5s ease-in-out infinite;
+}
+
+.firefly-6 {
+    top: 50%;
+    left: 10%;
+    animation: fireflyMove6 7.5s ease-in-out infinite;
+}
+
+@keyframes fireflyMove1 {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: translate(45px, -35px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.2;
+    }
+}
+
+@keyframes fireflyMove2 {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate(-50px, 30px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+    }
+}
+
+@keyframes fireflyMove3 {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translate(35px, 40px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.4;
+    }
+}
+
+@keyframes fireflyMove4 {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.25;
+    }
+
+    50% {
+        transform: translate(-30px, -45px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.25;
+    }
+}
+
+@keyframes fireflyMove5 {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: translate(-60px, -20px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.2;
+    }
+}
+
+@keyframes fireflyMove6 {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate(55px, 25px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+    }
 }
