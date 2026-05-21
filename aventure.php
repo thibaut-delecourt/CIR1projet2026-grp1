@@ -604,7 +604,7 @@
         }
 
         const cells = document.querySelectorAll(".case");
-        let prev_2 = [-1, -1]
+        let prev_2 = [0, 0]
         let prev_1 = [0, 0]
         cells.forEach((cell) => {
             cell.addEventListener("click", () => {
@@ -617,7 +617,7 @@
                     if(cell.classList.length == 3){
                         y = x
                     }
-                    let bool = verif_case(x, y, prev_1, prev_2)
+                    let bool = verif_case(x, y, prev_1, prev_2) && verif_voisin(x, y, prev_1, prev_2)
                     console.log(bool)
                     if (bool){
                         prev_2 = prev_1
@@ -751,23 +751,50 @@
                 [x,   y-1],            [x,   y+1],
                 [x+1, y-1], [x+1, y], [x+1, y+1]
             ];
+            let bool = false
 
             for (const [ni, nj] of voisins) {
                 // Hors grille → on ignore
                 if (ni < 0 || ni >= 9 || nj < 0 || nj >= 9) continue;
-
+                
                 const voisin     = tab_2[ni][nj];
                 const occupe     = voisin.classList.contains("selected") || voisin.classList.contains("fixed");
                 const estPrev1   = ni === prev_1[0] && nj === prev_1[1];
                 const estPrev2   = ni === prev_2[0] && nj === prev_2[1];
-                const estFin     = ni === 8 && nj === 8;
-
-                if (occupe && !estPrev1 && !estPrev2 && !estFin) {
+                
+                if (occupe && !estPrev1 && !estPrev2) {
                     return false;
                 }
             }
+            return true
+       
+        }
 
-            return true;
+        function verif_voisin(x, y){
+            const tab = document.querySelectorAll(".case");
+            const tab_2 = Array.from({ length: 9 }, (_, i) =>
+                Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
+            );
+
+            const voisins = [
+                [x-1, y], [x, y-1], [x, y+1], [x+1, y]
+            ];
+            let count = 0
+            for (const [ni, nj] of voisins) {
+                // Hors grille → on ignore
+                if (ni < 0 || ni >= 9 || nj < 0 || nj >= 9) continue;
+                
+                const voisin     = tab_2[ni][nj];
+                const occupe     = voisin.classList.contains("selected") || voisin.classList.contains("fixed");
+                
+                if (occupe) {
+                    count ++
+                }
+            }
+            if (count == 0){
+                return false
+            }
+            return true
         }
 
         function verifierParcours() {
