@@ -76,7 +76,7 @@
       </div>
 
       <div class="check-row">
-        <input type="checkbox" id="terms"/>
+        <input type="checkbox" id="terms" required/>
         <label for="terms">J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a></label>
       </div>
 
