@@ -31,12 +31,70 @@ session_start();
   </svg>
 </div>
 
+<div class="jungle-effects">
+  <div class="jungle-mist mist-1"></div>
+  <div class="jungle-mist mist-2"></div>
+
+  <div class="fireflies">
+      <span class="niveaufly firefly-1"></span>
+      <span class="niveaufly firefly-2"></span>
+      <span class="niveaufly firefly-3"></span>
+      <span class="niveaufly firefly-4"></span>
+      <span class="niveaufly firefly-5"></span>
+      <span class="niveaufly firefly-6"></span>
+  </div>
+</div>
+
 <main class="page">
   <a href="index.php" class="btn-back">← Retour</a>
 
   <h1 class="logo">RÈGLES</h1>
+  <p class="logo-sub">
+    Et présentation des
+    différents modes de jeu
+  </p>
 
  <div class="rules-box">
+
+ <section class="rules-section logic rules">
+    <div class="rules-text" style="max-width: 100%;">
+      <h2><span>🐍</span> Le Serpent (Snake / Tunnel)</h2>
+      <p class="intro">
+        Le <strong>Serpent</strong> est un jeu de logique se déroulant sur une grille de cases 
+        Le but est de tracer un serpent, reliant sa tête à sa queue, sans pour autant que différentes 
+        lignes ou colonnes de son corp se touchent (cela vaut aussi en diagonal). 
+      </p>
+
+      <div class="divider" style="marginn: 15px 0;"></div>
+
+      <h3>Comment jouer ?</h3>
+      <ul style="list-style-type: none; padding-left: 0; margin-bottom: 20px;">
+        <li style="margin-bottom: 12px; position: relative; padding-left: 24px; color: #fdf6e3;">
+          <span style="position: absolute; left: 0; color: #a8d832;">■</span>
+          <strong>Départ et Arrivée :</strong> Les deux cases initialement marquées/grisées sur la grille représentent la tête et la queue du serpent.
+        </li>
+        <li style="margin-bottom: 12px; position: relative; padding-left: 24px; color: #fdf6e3;">
+          <span style="position: absolute; left: 0; color: #a8d832;">■</span>
+          <strong>Le Corps du Serpent :</strong> Vous devez former une ligne continue (un chemin de cases noires) qui connecte ces deux extrémités.
+        </li>
+        <li style="margin-bottom: 12px; position: relative; padding-left: 24px; color: #fdf6e3;">
+          <span style="position: absolute; left: 0; color: #a8d832;">■</span>
+          <strong>Les Indices Numériques :</strong> Les numéros situés à l'extérieur (en bas et à droite de la grille) indiquent le nombre exact de cases qui doivent être noircies dans la ligne ou la colonne correspondante.
+        </li>
+        <li style="margin-bottom: 12px; position: relative; padding-left: 24px; color: #fdf6e3;">
+          <span style="position: absolute; left: 0; color: #a8d832;">■</span>
+          <strong>Interdiction de se toucher :</strong> La ligne noire du serpent ne peut <strong>jamais se croiser</strong> ou se toucher elle-même, pas même en diagonale par le coin d'une case. Chaque case noire du chemin ne doit toucher ses voisines du serpent que par ses côtés (haut, bas, gauche, droite).
+        </li>
+      </ul>
+      <div style="background: rgba(0, 0, 0, 0.3); border-left: 4px solid #3daa47; border-radius: 6px; padding: 15px; margin-top: 15px;">
+        <p style="margin: 0; color: #8dff9c; font-style: italic; font-size: 14px;">
+          💡 <strong>Astuce :</strong> Utilisez les indices les plus grands ou les plus petits (comme le 1 ou les nombres proches de la taille maximale de la grille) pour commencer à déduire l'emplacement des cases !
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="margin: 30px 0; border-bottom: 2px dashed rgba(255,255,255,0.1);"></div>
   
   <section class="rules-section">
     <div class="rules-text">
