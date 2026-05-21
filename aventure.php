@@ -532,40 +532,40 @@
                     }
 
                     let row_count = parcour_ligne();
+                    let correct_row=0
 
                     for (let i = 0; i < 9; i++) {
                         if (row_count[i] > rowNumbers[i]) {
                              document.querySelectorAll(".row-number")[i].style.color = "#ff0000";
-                        } else {
+                        } 
+                        else if(row_count[i] == rowNumbers[i]){
+                            correct_row++
+                            document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
+                        }
+                        else {
                             document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
                         }
                     }
 
-                    let correct_row=0
-
-                    for (let i = 0; i < 9; i++) {
-                        if (row_count[i] === rowNumbers[i]) {
-                            correct_row +=1
-                        } 
-                    }
-
                     let col_count = parcour_col();
+                    let correct_col=0
+
+
+
                     for (let i = 0; i < 9; i++) {
                         if (col_count[i] > colNumbers[i]) {
                             document.querySelectorAll(".col-number")[i].style.color = "#ff0000";
-                        } else {
+                        }
+                        else if(col_count[i] == colNumbers[i]){
+                            correct_col++
+                            document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
+                        }
+                        else {
                             document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
                         }
                     }
 
-                    let correct_col=0
-
-                    for (let i = 0; i < 9; i++) {
-                        if (col_count[i] === colNumbers[i]) {
-                            correct_col +=1
-                        } 
-                    }
-                    if(correct_col===correct_row===9){
+                    if(correct_col==9&&correct_row==9){
                         afficherVictoire()
                     }
                 }
