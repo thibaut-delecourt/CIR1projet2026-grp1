@@ -58,7 +58,7 @@ else{
 ?>
 
   <div class="cards">
-    <a href="aventure.php" class="card card-aventure">
+    <a href="Niveau.php" class="card card-aventure">
       <span class="card-icon">🗺️</span>
       <span class="card-label">Aventure</span>
     </a>

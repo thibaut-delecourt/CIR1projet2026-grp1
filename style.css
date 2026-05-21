@@ -36,7 +36,20 @@ body {
   align-items: center;
   padding: 48px 20px 60px;
 }
+/* ── NIVEAU ── */
+.niveau{
+ font-family: "Montserrat", sans-serif;;
+  font-size: clamp(40px, 8vw, 70px);
+  color: #f5c842;
+  position: relative;
+  z-index: 1;
+  font-family: 'Righteous', cursive;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 14px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 
+}
 /* ── HOME ── */
 .logo {
   font-family: 'Righteous', cursive;
@@ -346,7 +359,7 @@ body {
     pointer-events: none;
 }
 
-.firefly {
+.niveaufly {
     position: absolute;
     width: 7px;
     height: 7px;
