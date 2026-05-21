@@ -29,10 +29,17 @@
             z-index: 1;
         }
 
-        .btn-back,
-        .page {
+       .page {
             position: relative;
             z-index: 5;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 26px;
+            left: 26px;
+            z-index: 2000;
+            pointer-events: auto;
         }
 
         /* Brume légère animée */
