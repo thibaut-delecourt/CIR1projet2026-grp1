@@ -495,7 +495,7 @@
         let tab_2 = Array.from({ length: 9 }, (_, i) =>
             Array.from({ length: 9 }, (_, j) => tab_cell[i * 9 + j])
         );
-        let case_fausse = NaN
+        let case_fausse = [0]
         cells.forEach((cell) => {
             cell.addEventListener("click", () => {
                 let x = parseInt(cell.classList[1], 10)
@@ -505,17 +505,19 @@
                 }
                 if (!cell.classList.contains("fixed") && verif_voisin(x, y)) {
                     cell.classList.toggle("selected");
-                    if(!isNaN(case_fausse)){
+                    if(case_fausse.length == 2){
                         tab_2[case_fausse[0]][case_fausse[1]].classList.remove("erreur")
                         case_fausse = NaN
                     }
                     if(cell.classList.contains("selected")){
                         let v_case = verif_case(x, y, tab.at(-1), tab.at(-2))
-                        tab.push([x,y])
                         if (!v_case){
                             case_fausse = [x,y]
-                            cell.classList.toggle("selected");
+                            cell.classList.toggle("selected")
                             cell.classList.add("erreur")
+                        }
+                        else{
+                            tab.push([x,y])
                         }
                         if (verifierParcours()) {
                             afficherVictoire();
@@ -626,8 +628,9 @@
                 const occupe     = voisin.classList.contains("selected") || voisin.classList.contains("fixed");
                 const estPrev1   = ni === prev_1[0] && nj === prev_1[1];
                 const estPrev2   = ni === prev_2[0] && nj === prev_2[1];
+                const estFin = ni === 8 && nj === 8;
                 
-                if (occupe && !estPrev1 && !estPrev2) {
+                if (occupe && !estPrev1 && !estPrev2 && !estFin) {
                     return false;
                 }
             }
