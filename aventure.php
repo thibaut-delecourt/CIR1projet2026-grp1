@@ -713,28 +713,28 @@
             if (j<tab_2.length-1 && (i == x_p_1 && j+1 == y_p_1)){
                 prev_1_trouver = true
             }
-            if (j<tab_2.length-1 && (tab_2[i][j+1].classList.contains("selected") || tab_2[i][j+1].classList.contains("fixed")) && ((i != x_p_1 || j+1 != y_p_1) && (i != x_p_2 || j+1 != y_p_2))){
+            if (j<tab_2.length-1 && (tab_2[i][j+1].classList.contains("selected") || tab_2[i][j+1].classList.contains("fixed")) && ((i != x_p_1 || j+1 != y_p_1) && (i != x_p_2 || j+1 != y_p_2)) && (i != 8 && j+1 != 8)){
                 return false
             }
-            if (i<tab_2.length-1 && (tab_2[i+1][j].classList.contains("selected") || tab_2[i+1][j].classList.contains("fixed")) && ((i+1 != x_p_1 || j != y_p_1) && (i+1 != x_p_2 || j != y_p_2))){
+            if (i<tab_2.length-1 && (tab_2[i+1][j].classList.contains("selected") || tab_2[i+1][j].classList.contains("fixed")) && ((i+1 != x_p_1 || j != y_p_1) && (i+1 != x_p_2 || j != y_p_2)) && (i+1 != 8 && j != 8)){
                 return false
             }
-            if ((j<tab_2.length-1 && i<tab_2.length-1) && (tab_2[i+1][j+1].classList.contains("selected") || tab_2[i+1][j+1].classList.contains("fixed"))&& ((i+1 != x_p_1 || j+1 != y_p_1) && (i+1 != x_p_2 || j+1 != y_p_2))){
+            if ((j<tab_2.length-1 && i<tab_2.length-1) && (tab_2[i+1][j+1].classList.contains("selected") || tab_2[i+1][j+1].classList.contains("fixed"))&& ((i+1 != x_p_1 || j+1 != y_p_1) && (i+1 != x_p_2 || j+1 != y_p_2)) && (i+1 != 8 && j+1 != 8)){
                 return false 
             }
-            if (j>0 && (tab_2[i][j-1].classList.contains("selected") || tab_2[i][j-1].classList.contains("fixed"))&& ((i != x_p_1 || j-1 != y_p_1) && (i != x_p_2 || j-1 != y_p_2))){
+            if (j>0 && (tab_2[i][j-1].classList.contains("selected") || tab_2[i][j-1].classList.contains("fixed"))&& ((i != x_p_1 || j-1 != y_p_1) && (i != x_p_2 || j-1 != y_p_2)) && (i != 8 && j-1 != 8)){
                 return false 
             }
-            if (i>0 && (tab_2[i-1][j].classList.contains("selected") || tab_2[i-1][j].classList.contains("fixed")) && ((i-1 != x_p_1 || j != y_p_1) && (i-1 != x_p_2 || j != y_p_2))){
+            if (i>0 && (tab_2[i-1][j].classList.contains("selected") || tab_2[i-1][j].classList.contains("fixed")) && ((i-1 != x_p_1 || j != y_p_1) && (i-1 != x_p_2 || j != y_p_2)) && (i-1 != 8 && j != 8)){
                 return false 
             }
-            if ((j>0 && i>0) && (tab_2[i-1][j-1].classList.contains("selected") || tab_2[i-1][j-1].classList.contains("fixed"))&& ((i-1 != x_p_1 || j-1 != y_p_1) && (i-1 != x_p_2 || j-1 != y_p_2))){
+            if ((j>0 && i>0) && (tab_2[i-1][j-1].classList.contains("selected") || tab_2[i-1][j-1].classList.contains("fixed"))&& ((i-1 != x_p_1 || j-1 != y_p_1) && (i-1 != x_p_2 || j-1 != y_p_2)) && (i-1 != 8 && j-1 != 8)){
                 return false 
             }
-            if ((j<tab_2.length-1 && i>0) && (tab_2[i-1][j+1].classList.contains("selected") || tab_2[i-1][j+1].classList.contains("fixed"))&& ((i-1 != x_p_1 || j+1 != y_p_1) && (i-1 != x_p_2 || j+1 != y_p_2))){
+            if ((j<tab_2.length-1 && i>0) && (tab_2[i-1][j+1].classList.contains("selected") || tab_2[i-1][j+1].classList.contains("fixed"))&& ((i-1 != x_p_1 || j+1 != y_p_1) && (i-1 != x_p_2 || j+1 != y_p_2)) && (i-1 != 8 && j+1 != 8)){
                 return false 
             }
-            if ((i<tab_2.length-1 && j>0) && (tab_2[i+1][j-1].classList.contains("selected") || tab_2[i+1][j-1].classList.contains("fixed"))&& ((i+1 != x_p_1 || j-1 != y_p_1) && (i+1 != x_p_2 || j-1 != y_p_2))){
+            if ((i<tab_2.length-1 && j>0) && (tab_2[i+1][j-1].classList.contains("selected") || tab_2[i+1][j-1].classList.contains("fixed"))&& ((i+1 != x_p_1 || j-1 != y_p_1) && (i+1 != x_p_2 || j-1 != y_p_2)) && (i+1 != 8 && j-1 != 8)){
                 return false
             }               
             return true
