@@ -103,6 +103,9 @@
             background-color: #ae9e9e;
         }
 
+        .case.erreur {
+            background-color : #ff0000;
+        }
         .row-number {
             width: 30px;
             height: 45px;
@@ -492,6 +495,7 @@
         let tab_2 = Array.from({ length: 9 }, (_, i) =>
             Array.from({ length: 9 }, (_, j) => tab_cell[i * 9 + j])
         );
+        let case_fausse = NaN
         cells.forEach((cell) => {
             cell.addEventListener("click", () => {
                 let x = parseInt(cell.classList[1], 10)
@@ -501,13 +505,17 @@
                 }
                 if (!cell.classList.contains("fixed") && verif_voisin(x, y)) {
                     cell.classList.toggle("selected");
+                    if(!isNaN(case_fausse)){
+                        tab_2[case_fausse[0]][case_fausse[1]].classList.remove("erreur")
+                        case_fausse = NaN
+                    }
                     if(cell.classList.contains("selected")){
-                        cell.style.backgroundColor = "#f5d76e"
                         let v_case = verif_case(x, y, tab.at(-1), tab.at(-2))
                         tab.push([x,y])
                         if (!v_case){
-                            cell.style.backgroundColor = "#ff0000"
+                            case_fausse = [x,y]
                             cell.classList.toggle("selected");
+                            cell.classList.add("erreur")
                         }
                         if (verifierParcours()) {
                             afficherVictoire();
