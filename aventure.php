@@ -449,6 +449,7 @@
                 Réinitialisation automatique dans 15 secondes.
             </div>
             <button class="victory-button" onclick="location.reload()">Rejouer</button>
+            <button class="victory-button" onclick="location.href='index.php';">Retour a l'accueil</button>
         </div>
     </div>
 
