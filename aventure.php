@@ -616,6 +616,11 @@
         const cells = document.querySelectorAll(".case");
         let prev_2 = [-1, -1]
         let prev_1 = [0, 0]
+        let tab = [prev_2,prev_1]
+        const tab_cell = document.querySelectorAll(".case");
+        const tab_2 = Array.from({ length: 9 }, (_, i) =>
+            Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
+        );
         cells.forEach((cell) => {
             cell.addEventListener("click", () => {
                 let x = parseInt(cell.classList[1], 10)
@@ -625,28 +630,38 @@
                 }
                 if (!cell.classList.contains("fixed") && verif_voisin(x, y)) {
                     cell.classList.toggle("selected");
-
-                    let v_case = verif_case(x, y, prev_1, prev_2)
-                    console.log(v_case, cell.classList)
-                    if (v_case){
-                        prev_2 = prev_1
-                        prev_1 = [x, y]
+                    if(cell.classList.contains("selected")){
+                        tab.push([x,y])
+                        let v_case = verif_case(x, y, tab.at(-1), tab.at(-2))
+                        if (!v_case){
+                           cell.style.backgroundColor = "#ff0000"
+                        }
+                        if (verifierParcours()) {
+                            afficherVictoire();
+                        }  
                     }
                     else{
-                        cell.style.backgroundColor = "#ff0000"
+                        let i = tab.length -1
+                        while(tab[i] != [x,y]){
+                            let val = tab.pop()
+                            tab_2[val[0]][val[1]].classList.remove("selected")
+                            i --
+                        }
+                        let val = tab.pop()
+                        tab_2[val[0]][val[1]].classList.remove("selected")
                     }
+
                     let row_count = parcour_ligne();
 
                     for (let i = 0; i < 9; i++) {
                         if (row_count[i] > rowNumbers[i]) {
-                            document.querySelectorAll(".row-number")[i].style.color = "#ff0000";
+                             document.querySelectorAll(".row-number")[i].style.color = "#ff0000";
                         } else {
                             document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
                         }
                     }
 
                     let col_count = parcour_col();
-
                     for (let i = 0; i < 9; i++) {
                         if (col_count[i] > colNumbers[i]) {
                             document.querySelectorAll(".col-number")[i].style.color = "#ff0000";
@@ -654,14 +669,7 @@
                             document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
                         }
                     }
-
-                    if (verifierParcours()) {
-                        afficherVictoire();
-                    }  
                 }
-                
-
-                
             });
         });
         cells.forEach((cell) => {
