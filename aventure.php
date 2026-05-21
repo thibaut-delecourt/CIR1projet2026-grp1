@@ -617,9 +617,9 @@
         let prev_2 = [-1, -1]
         let prev_1 = [0, 0]
         let tab = [prev_2,prev_1]
-        const tab_cell = document.querySelectorAll(".case");
-        const tab_2 = Array.from({ length: 9 }, (_, i) =>
-            Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
+        let tab_cell = document.querySelectorAll(".case");
+        let tab_2 = Array.from({ length: 9 }, (_, i) =>
+            Array.from({ length: 9 }, (_, j) => tab_cell[i * 9 + j])
         );
         cells.forEach((cell) => {
             cell.addEventListener("click", () => {
@@ -631,21 +631,21 @@
                 if (!cell.classList.contains("fixed") && verif_voisin(x, y)) {
                     cell.classList.toggle("selected");
                     if(cell.classList.contains("selected")){
-                        tab.push([x,y])
+                        cell.style.backgroundColor = "#f5d76e"
                         let v_case = verif_case(x, y, tab.at(-1), tab.at(-2))
+                        tab.push([x,y])
                         if (!v_case){
-                           cell.style.backgroundColor = "#ff0000"
+                            cell.style.backgroundColor = "#ff0000"
+                            cell.classList.toggle("selected");
                         }
                         if (verifierParcours()) {
                             afficherVictoire();
                         }  
                     }
                     else{
-                        let i = tab.length -1
-                        while(tab[i] != [x,y]){
+                        while((tab.at(-1)[0] != x) || (tab.at(-1)[1] != y)){
                             let val = tab.pop()
                             tab_2[val[0]][val[1]].classList.remove("selected")
-                            i --
                         }
                         let val = tab.pop()
                         tab_2[val[0]][val[1]].classList.remove("selected")
