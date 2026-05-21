@@ -99,6 +99,9 @@
         .case.selected {
             background-color: #f5d76e;
         }
+        .case.brouillon {
+            background-color: #ae9e9e;
+        }
 
         .row-number {
             width: 30px;
@@ -656,10 +659,19 @@
                         afficherVictoire();
                     }  
                 }
+                
 
                 
             });
         });
+        cells.forEach((cell) => {
+            cell.addEventListener('contextmenu', (event) => {
+                event.preventDefault();
+                if (!cell.classList.contains("fixed")) {
+                    cell.classList.toggle("brouillon");
+                }
+            })
+        })
 
         function parcour_ligne() {
             const tab = document.querySelectorAll(".case");
