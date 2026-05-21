@@ -16,6 +16,12 @@ if(isset($_POST["creer_mon_compte"])){
         // pour recupérer id car on en aura besoin avec le score
         $_SESSION['id'] = $conn->lastInsertId();
 
+        $reqscoreprep = 'INSERT INTO score(id_user,score_max) VALUES (:id,:score)';
+        $reqscore = $conn->prepare($reqscoreprep);
+
+        $tab2 = array(':id'=>$_SESSION['id'], ':score'=>0);
+        $reqscore->execute($tab2);
+
         $conn = NULL;
         echo '
         <script>
@@ -23,6 +29,7 @@ if(isset($_POST["creer_mon_compte"])){
             window.location.href = "../index.php";
         </script>';
         
+
     }
     catch(Exception $e){
         echo '
