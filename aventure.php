@@ -103,9 +103,6 @@
             background-color: #ae9e9e;
         }
 
-        .case.erreur {
-            background-color : #ff0000;
-        }
         .row-number {
             width: 30px;
             height: 45px;
@@ -449,7 +446,6 @@
                 Réinitialisation automatique dans 15 secondes.
             </div>
             <button class="victory-button" onclick="location.reload()">Rejouer</button>
-            <button class="victory-button" onclick="location.href='index.php';">Retour a l'accueil</button>
         </div>
     </div>
 
@@ -492,11 +488,10 @@
         let prev_2 = [-1, -1]
         let prev_1 = [0, 0]
         let tab = [prev_2,prev_1]
-        let tab_cell = document.querySelectorAll(".case");
-        let tab_2 = Array.from({ length: 9 }, (_, i) =>
-            Array.from({ length: 9 }, (_, j) => tab_cell[i * 9 + j])
+        const tab_cell = document.querySelectorAll(".case");
+        const tab_2 = Array.from({ length: 9 }, (_, i) =>
+            Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
         );
-        let case_fausse = [0]
         cells.forEach((cell) => {
             cell.addEventListener("click", () => {
                 let x = parseInt(cell.classList[1], 10)
@@ -506,67 +501,44 @@
                 }
                 if (!cell.classList.contains("fixed") && verif_voisin(x, y)) {
                     cell.classList.toggle("selected");
-                    if(case_fausse.length == 2){
-                        tab_2[case_fausse[0]][case_fausse[1]].classList.remove("erreur")
-                        case_fausse = NaN
-                    }
                     if(cell.classList.contains("selected")){
+                        tab.push([x,y])
                         let v_case = verif_case(x, y, tab.at(-1), tab.at(-2))
                         if (!v_case){
-                            case_fausse = [x,y]
-                            cell.classList.toggle("selected")
-                            cell.classList.add("erreur")
+                           cell.style.backgroundColor = "#ff0000"
                         }
-                        else{
-                            tab.push([x,y])
-                        }
-                        
+                        if (verifierParcours()) {
+                            afficherVictoire();
+                        }  
                     }
                     else{
-                        while((tab.at(-1)[0] != x) || (tab.at(-1)[1] != y)){
+                        let i = tab.length -1
+                        while(tab[i] != [x,y]){
                             let val = tab.pop()
                             tab_2[val[0]][val[1]].classList.remove("selected")
+                            i --
                         }
                         let val = tab.pop()
                         tab_2[val[0]][val[1]].classList.remove("selected")
                     }
 
                     let row_count = parcour_ligne();
-                    let correct_row=0
 
                     for (let i = 0; i < 9; i++) {
                         if (row_count[i] > rowNumbers[i]) {
                              document.querySelectorAll(".row-number")[i].style.color = "#ff0000";
-                        } 
-                        else if(row_count[i] == rowNumbers[i]){
-                            correct_row++
-                            document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
-                        }
-                        else {
+                        } else {
                             document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
                         }
                     }
 
                     let col_count = parcour_col();
-                    let correct_col=0
-
-
-
                     for (let i = 0; i < 9; i++) {
                         if (col_count[i] > colNumbers[i]) {
                             document.querySelectorAll(".col-number")[i].style.color = "#ff0000";
-                        }
-                        else if(col_count[i] == colNumbers[i]){
-                            correct_col++
+                        } else {
                             document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
                         }
-                        else {
-                            document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
-                        }
-                    }
-
-                    if(correct_col==9&&correct_row==9){
-                        afficherVictoire()
                     }
                 }
             });
@@ -646,9 +618,8 @@
                 const occupe     = voisin.classList.contains("selected") || voisin.classList.contains("fixed");
                 const estPrev1   = ni === prev_1[0] && nj === prev_1[1];
                 const estPrev2   = ni === prev_2[0] && nj === prev_2[1];
-                const estFin = ni === 8 && nj === 8;
                 
-                if (occupe && !estPrev1 && !estPrev2 && !estFin) {
+                if (occupe && !estPrev1 && !estPrev2) {
                     return false;
                 }
             }
@@ -683,117 +654,6 @@
             return true
         }
 
-        function verifierParcours() {
-            const tab = document.querySelectorAll(".case");
-
-            const startIndex = 0;
-            const endIndex = 80;
-
-            function estCaseChemin(index) {
-                return tab[index].classList.contains("selected") ||
-                       tab[index].classList.contains("fixed");
-            }
-
-            function getVoisins(index) {
-                const row = Math.floor(index / 9);
-                const col = index % 9;
-
-                const voisins = [];
-
-                if (row > 0) {
-                    voisins.push((row - 1) * 9 + col);
-                }
-
-                if (row < 8) {
-                    voisins.push((row + 1) * 9 + col);
-                }
-
-                if (col > 0) {
-                    voisins.push(row * 9 + (col - 1));
-                }
-
-                if (col < 8) {
-                    voisins.push(row * 9 + (col + 1));
-                }
-
-                return voisins;
-            }
-
-            const rowCount = parcour_ligne();
-
-            for (let i = 0; i < 9; i++) {
-                if (rowCount[i] !== rowNumbers[i]) {
-                    return false;
-                }
-            }
-
-            const colCount = parcour_col();
-
-            for (let i = 0; i < 9; i++) {
-                if (colCount[i] !== colNumbers[i]) {
-                    return false;
-                }
-            }
-
-            if (!estCaseChemin(startIndex) || !estCaseChemin(endIndex)) {
-                return false;
-            }
-
-            const visited = new Set();
-            const stack = [startIndex];
-
-            while (stack.length > 0) {
-                const current = stack.pop();
-
-                if (!visited.has(current)) {
-                    visited.add(current);
-
-                    const voisins = getVoisins(current);
-
-                    for (let voisin of voisins) {
-                        if (estCaseChemin(voisin) && !visited.has(voisin)) {
-                            stack.push(voisin);
-                        }
-                    }
-                }
-            }
-
-            if (!visited.has(endIndex)) {
-                return false;
-            }
-
-            for (let i = 0; i < tab.length; i++) {
-                if (estCaseChemin(i) && !visited.has(i)) {
-                    return false;
-                }
-            }
-
-            for (let i = 0; i < tab.length; i++) {
-                if (estCaseChemin(i)) {
-                    let nbVoisinsChemin = 0;
-
-                    const voisins = getVoisins(i);
-
-                    for (let voisin of voisins) {
-                        if (estCaseChemin(voisin)) {
-                            nbVoisinsChemin++;
-                        }
-                    }
-
-                    if (i === startIndex || i === endIndex) {
-                        if (nbVoisinsChemin !== 1) {
-                            return false;
-                        }
-                    } else {
-                        if (nbVoisinsChemin !== 2) {
-                            return false;
-                        }
-                    }
-                }
-            }
-
-            return true;
-        }
 
         function afficherVictoire() {
             if (victoireDejaAffichee) {
