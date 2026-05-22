@@ -446,6 +446,26 @@
       <span class="niveau">Niveau 5</span>
       <span class="logo-sub">L'aigle est l'ennemi des serpents</span>
   </a>
+    <a href="aventure_6.php" class="card card-aventure">
+      <span class="niveau">Niveau 6</span>
+      <span class="logo-sub">Tout les serpents ne sont pas venimeux</span>
+  </a>
+ <a href="aventure_7.php" class="card card-aventure">
+      <span class="niveau">Niveau 7</span>
+      <span class="logo-sub">Muer comme un serpent</span>
+  </a>
+<a href="aventure_8.php" class="card card-aventure">
+      <span class="niveau">Niveau 8</span>
+      <span class="logo-sub">Les serpents glissent vers leurs objectifs</span>
+  </a>
 
+  <a href="aventure_9.php" class="card card-aventure">
+      <span class="niveau">Niveau 9</span>
+      <span class="logo-sub">Le serpent perd en appetit avec l'age</span>
+  </a>
+  <a href="aventure_10.php" class="card card-aventure">
+      <span class="niveau">Niveau 10</span>
+      <span class="logo-sub">Le chemin du serpent</span>
+  </a>
 
   
