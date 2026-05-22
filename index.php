@@ -11,7 +11,6 @@ session_start();
   <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
-
   <div class="bg">
       <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
           <path d="M-20,900 Q60,500 200,560 Q100,700 -20,900Z"  fill="#1e5523" opacity="0.9"/>
