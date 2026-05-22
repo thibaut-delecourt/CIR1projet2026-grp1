@@ -416,7 +416,7 @@
         </div>
     </div>
 
-    <a href="index.php" class="btn-back">← Accueil</a>
+    <a href="niveau.php" class="btn-back">← Accueil Aventure</a>
 
     <main class="page">
         <h1 class="logo">COBRA</h1>
