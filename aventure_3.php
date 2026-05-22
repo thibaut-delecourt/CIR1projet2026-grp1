@@ -103,6 +103,9 @@
             background-color: #ae9e9e;
         }
 
+        .case.erreur {
+            background-color : #ff0000;
+        }
         .row-number {
             width: 30px;
             height: 45px;
@@ -446,6 +449,7 @@
                 Réinitialisation automatique dans 15 secondes.
             </div>
             <button class="victory-button" onclick="location.reload()">Rejouer</button>
+            <button class="victory-button" onclick="location.href='niveau.php';">Retour aux niveaux</button>
         </div>
     </div>
 
@@ -488,11 +492,11 @@
         let prev_2 = [-1, -1]
         let prev_1 = [0, 0]
         let tab = [prev_2,prev_1]
-        const tab_cell = document.querySelectorAll(".case");
-        const tab_2 = Array.from({ length: 9 }, (_, i) =>
-            Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
-        );
-        cells.forEach((cell) => {
+        let tab_cell = document.querySelectorAll(".case");
+        let tab_2 = Array.from({ length: 9 }, (_, i) =>
+            Array.from({ length: 9 }, (_, j) => tab_cell[i * 9 + j]));
+        let case_fausse = [0]
+            cells.forEach((cell) => {
             cell.addEventListener("click", () => {
                 let x = parseInt(cell.classList[1], 10)
                 let y = parseInt(cell.classList[2], 10)
@@ -501,44 +505,62 @@
                 }
                 if (!cell.classList.contains("fixed") && verif_voisin(x, y)) {
                     cell.classList.toggle("selected");
+                    if(case_fausse.length == 2){
+                        tab_2[case_fausse[0]][case_fausse[1]].classList.remove("erreur")
+                        case_fausse = NaN
+                    }
                     if(cell.classList.contains("selected")){
-                        tab.push([x,y])
                         let v_case = verif_case(x, y, tab.at(-1), tab.at(-2))
                         if (!v_case){
-                           cell.style.backgroundColor = "#ff0000"
+                            case_fausse = [x,y]
+                            cell.classList.toggle("selected")
+                            cell.classList.add("erreur")
                         }
-                        if (verifierParcours()) {
-                            afficherVictoire();
-                        }  
+                        else{
+                            tab.push([x,y])
+                        } 
                     }
                     else{
-                        let i = tab.length -1
-                        while(tab[i] != [x,y]){
+                        while((tab.at(-1)[0] != x) || (tab.at(-1)[1] != y)){
                             let val = tab.pop()
                             tab_2[val[0]][val[1]].classList.remove("selected")
-                            i --
                         }
                         let val = tab.pop()
                         tab_2[val[0]][val[1]].classList.remove("selected")
                     }
 
                     let row_count = parcour_ligne();
+                    let correct_row=0
 
                     for (let i = 0; i < 9; i++) {
                         if (row_count[i] > rowNumbers[i]) {
                              document.querySelectorAll(".row-number")[i].style.color = "#ff0000";
-                        } else {
+                        } 
+                        else if(row_count[i] == rowNumbers[i]){
+                            correct_row++
+                            document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
+                        }
+                        else {
                             document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
                         }
                     }
 
                     let col_count = parcour_col();
+                    let correct_col=0
                     for (let i = 0; i < 9; i++) {
                         if (col_count[i] > colNumbers[i]) {
                             document.querySelectorAll(".col-number")[i].style.color = "#ff0000";
-                        } else {
+                        } 
+                        else if(col_count[i] == colNumbers[i]){
+                            correct_col++
                             document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
                         }
+                        else {
+                            document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
+                        }
+                    }
+                    if(correct_col==9 && correct_row==9){
+                        afficherVictoire()
                     }
                 }
             });
@@ -618,8 +640,9 @@
                 const occupe     = voisin.classList.contains("selected") || voisin.classList.contains("fixed");
                 const estPrev1   = ni === prev_1[0] && nj === prev_1[1];
                 const estPrev2   = ni === prev_2[0] && nj === prev_2[1];
-                
-                if (occupe && !estPrev1 && !estPrev2) {
+                const estFin = ni === 8 && nj === 8;
+
+                if (occupe && !estPrev1 && !estPrev2 && !estFin) {
                     return false;
                 }
             }
