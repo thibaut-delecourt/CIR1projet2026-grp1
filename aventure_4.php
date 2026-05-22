@@ -456,8 +456,8 @@
     <script>
         const grid = document.getElementById("grid");
 
-        const rowNumbers = [1, 6, 1, 4, 3, 4, 3, 4, 7];
-        const colNumbers = [6, 4, 4, 3, 3, 7, 1, 4, 1];
+        const rowNumbers = [1, 4, 4, 3, 4, 3, 6, 1, 1];
+        const colNumbers = [7, 1, 1, 1, 3, 3, 2, 1, 8];
 
         let victoireDejaAffichee = false;
         let countdownInterval = null;
