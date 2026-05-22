@@ -60,9 +60,9 @@ session_start();
     <div class="rules-text" style="max-width: 100%;">
       <h2><span>🐍</span> Le Serpent (Snake / Tunnel)</h2>
       <p class="intro">
-        Le <strong>Serpent</strong> est un jeu de logique se déroulant sur une grille de cases 
+        Le <strong>Serpent</strong> est un jeu de logique se déroulant sur une grille de cases. 
         Le but est de tracer un serpent, reliant sa tête à sa queue, sans pour autant que différentes 
-        lignes ou colonnes de son corp se touchent (cela vaut aussi en diagonal). 
+        lignes ou colonnes de son corps se touchent (cela vaut aussi en diagonale). 
       </p>
 
       <div class="divider" style="marginn: 15px 0;"></div>
