@@ -41,6 +41,201 @@
             pointer-events: auto;
         }
 
+        .game-zone {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .jungle-frame {
+            position: relative;
+            padding: 32px;
+            border-radius: 18px;
+            background: rgba(12, 55, 20, 0.55);
+            border: 3px solid #245c28;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.45);
+            overflow: visible;
+        }
+
+        .jungle-frame::before {
+            content: "";
+            position: absolute;
+            inset: -18px;
+            border-radius: 25px;
+            border: 6px solid rgba(68, 140, 50, 0.85);
+            pointer-events: none;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 45px) 30px;
+            grid-template-rows: repeat(9, 45px) 30px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .case {
+            width: 45px;
+            height: 45px;
+            background-color: #1b4d21;
+            border: 1px solid #123d18;
+        }
+
+        .case.fixed {
+            background-color: #4f4f4f;
+        }
+
+        .case:hover {
+            background-color: #9fea96;
+            cursor: pointer;
+        }
+
+        .case.fixed:hover {
+            background-color: #4f4f4f;
+            cursor: default;
+        }
+
+        .case.selected {
+            background-color: #f5d76e;
+        }
+        .case.brouillon {
+            background-color: #ae9e9e;
+        }
+
+        .case.erreur {
+            background-color : #ff0000;
+        }
+        .row-number {
+            width: 30px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #f5d76e;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .col-number {
+            width: 45px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #f5d76e;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .leaf {
+            position: absolute;
+            font-size: 38px;
+            z-index: 4;
+            user-select: none;
+            pointer-events: none;
+            filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.45));
+        }
+
+        .leaf-1 {
+            top: -35px;
+            left: -25px;
+            animation: leafMove1 3.5s ease-in-out infinite;
+        }
+
+        .leaf-2 {
+            top: -38px;
+            right: -25px;
+            animation: leafMove2 4s ease-in-out infinite;
+        }
+
+        .leaf-3 {
+            bottom: -35px;
+            left: -25px;
+            animation: leafMove3 3.8s ease-in-out infinite;
+        }
+
+        .leaf-4 {
+            bottom: -38px;
+            right: -25px;
+            animation: leafMove4 4.2s ease-in-out infinite;
+        }
+
+        .leaf-5 {
+            top: 35%;
+            left: -45px;
+            animation: leafMove5 3.2s ease-in-out infinite;
+        }
+
+        .leaf-6 {
+            top: 35%;
+            right: -45px;
+            animation: leafMove6 3.6s ease-in-out infinite;
+        }
+
+        .leaf-7 {
+            top: 52%;
+            left: -48px;
+            animation: leafMove7 4.4s ease-in-out infinite;
+        }
+
+        .leaf-8 {
+            top: 52%;
+            right: -48px;
+            animation: leafMove8 4.1s ease-in-out infinite;
+        }
+
+        @keyframes leafMove1 {
+            0% { transform: rotate(-35deg) translate(0, 0); }
+            50% { transform: rotate(-22deg) translate(8px, -6px); }
+            100% { transform: rotate(-35deg) translate(0, 0); }
+        }
+
+        @keyframes leafMove2 {
+            0% { transform: rotate(35deg) translate(0, 0); }
+            50% { transform: rotate(22deg) translate(-8px, -6px); }
+            100% { transform: rotate(35deg) translate(0, 0); }
+        }
+
+        @keyframes leafMove3 {
+            0% { transform: rotate(-140deg) translate(0, 0); }
+            50% { transform: rotate(-155deg) translate(7px, 6px); }
+            100% { transform: rotate(-140deg) translate(0, 0); }
+        }
+
+        @keyframes leafMove4 {
+            0% { transform: rotate(140deg) translate(0, 0); }
+            50% { transform: rotate(155deg) translate(-7px, 6px); }
+            100% { transform: rotate(140deg) translate(0, 0); }
+        }
+
+        @keyframes leafMove5 {
+            0% { transform: rotate(-75deg) translate(0, 0); }
+            50% { transform: rotate(-90deg) translate(-6px, 8px); }
+            100% { transform: rotate(-75deg) translate(0, 0); }
+        }
+
+        @keyframes leafMove6 {
+            0% { transform: rotate(75deg) translate(0, 0); }
+            50% { transform: rotate(90deg) translate(6px, 8px); }
+            100% { transform: rotate(75deg) translate(0, 0); }
+        }
+
+        @keyframes leafMove7 {
+            0% { transform: rotate(-105deg) translate(0, 0); }
+            50% { transform: rotate(-120deg) translate(-8px, -5px); }
+            100% { transform: rotate(-105deg) translate(0, 0); }
+        }
+
+        @keyframes leafMove8 {
+            0% { transform: rotate(105deg) translate(0, 0); }
+            50% { transform: rotate(120deg) translate(8px, -5px); }
+            100% { transform: rotate(105deg) translate(0, 0); }
+        }
+
+
     </style>
 </head>
 
@@ -81,7 +276,226 @@
     <main class="page">
         <h1 class="logo">COBRA</h1>
         <p class="logo-sub">Mode Concepteur</p>
+
+        <section class="game-zone">
+            <div class="jungle-frame">
+                <span class="leaf leaf-1">🌿</span>
+                <span class="leaf leaf-2">🌿</span>
+                <span class="leaf leaf-3">🌿</span>
+                <span class="leaf leaf-4">🌿</span>
+                <span class="leaf leaf-5">🍃</span>
+                <span class="leaf leaf-6">🍃</span>
+                <span class="leaf leaf-7">🍃</span>
+                <span class="leaf leaf-8">🍃</span>
+
+                <div class="puzzle-grid" id="grid"></div>
+            </div>
+        </section>
     </main>
+
+    <script>
+
+        const grid = document.getElementById("grid");
+
+        const rowNumbers = [ , , , , , , , , ];
+        const colNumbers = [ , , , , , , , , ];
+
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                const cell = document.createElement("div");
+                cell.classList.add("case");
+                cell.classList.add(`${row}`);
+                cell.classList.add(`${col}`);
+                if ((row === 0 && col === 0) || (row === 8 && col === 8)) {
+                    cell.classList.add("fixed");
+                }
+
+                grid.appendChild(cell);
+            }
+
+            const rowNumber = document.createElement("div");
+            rowNumber.classList.add("row-number");
+            rowNumber.textContent = rowNumbers[row];
+            grid.appendChild(rowNumber);
+        }
+
+         for (let col = 0; col < 9; col++) {
+            const colNumber = document.createElement("div");
+            colNumber.classList.add("col-number");
+            colNumber.textContent = colNumbers[col];
+            grid.appendChild(colNumber);
+        }
+        
+
+        const cells = document.querySelectorAll(".case");
+        let prev_2 = [-1, -1]
+        let prev_1 = [0, 0]
+        let tab = [prev_2,prev_1]
+        let tab_cell = document.querySelectorAll(".case");
+        let tab_2 = Array.from({ length: 9 }, (_, i) =>
+            Array.from({ length: 9 }, (_, j) => tab_cell[i * 9 + j]));
+        let case_fausse = [0]
+            cells.forEach((cell) => {
+            cell.addEventListener("click", () => {
+                let x = parseInt(cell.classList[1], 10)
+                let y = parseInt(cell.classList[2], 10)
+                if(isNaN(y)){
+                    y = x
+                }
+                if (!cell.classList.contains("fixed") && verif_voisin(x, y)) {
+                    cell.classList.toggle("selected");
+                    if(case_fausse.length == 2){
+                        tab_2[case_fausse[0]][case_fausse[1]].classList.remove("erreur")
+                        case_fausse = NaN
+                    }
+                    if(cell.classList.contains("selected")){
+                        let v_case = verif_case(x, y, tab.at(-1), tab.at(-2))
+                        if(!verif_clic(x, y, tab.at(-1))){
+                            cell.classList.toggle("selected");
+                        }
+                        else if (!v_case){
+                            case_fausse = [x,y]
+                            cell.classList.toggle("selected")
+                            cell.classList.add("erreur")
+                        }
+                        else{
+                            tab.push([x,y])
+                        } 
+                    }
+                    else{
+                        while((tab.at(-1)[0] != x) || (tab.at(-1)[1] != y)){
+                            let val = tab.pop()
+                            tab_2[val[0]][val[1]].classList.remove("selected")
+                        }
+                        let val = tab.pop()
+                        tab_2[val[0]][val[1]].classList.remove("selected")
+                    }
+
+                    let row_count = parcour_ligne();
+                    let col_count = parcour_col();
+                }
+            });
+        });
+
+        function parcour_ligne() {
+            const tab = document.querySelectorAll(".case");
+            let tab_count = [];
+
+            for (let i = 0; i < 9; i++) {
+                let count = 0;
+
+                for (let j = 0; j < 9; j++) {
+                    if (
+                        tab[i * 9 + j].classList.contains("selected") ||
+                        tab[i * 9 + j].classList.contains("fixed")
+                    ) {
+                        count += 1;
+                    }
+                }
+
+                tab_count.push(count);
+            }
+
+            return tab_count;
+        }
+
+        function parcour_col() {
+            const tab = document.querySelectorAll(".case");
+            let tab_count = [];
+
+            for (let i = 0; i < 9; i++) {
+                let count = 0;
+
+                for (let j = 0; j < 9; j++) {
+                    if (
+                        tab[j * 9 + i].classList.contains("selected") ||
+                        tab[j * 9 + i].classList.contains("fixed")
+                    ) {
+                        count += 1;
+                    }
+                }
+
+                tab_count.push(count);
+            }
+
+            return tab_count;
+        }
+
+
+        function verif_case(x, y, prev_1, prev_2) {
+            const tab = document.querySelectorAll(".case");
+            const tab_2 = Array.from({ length: 9 }, (_, i) =>
+                Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
+            );
+
+            const voisins = [
+                [x-1, y-1], [x-1, y], [x-1, y+1],
+                [x,   y-1],            [x,   y+1],
+                [x+1, y-1], [x+1, y], [x+1, y+1]
+            ];
+            let bool = false
+
+            for (const [ni, nj] of voisins) {
+                // Hors grille → on ignore
+                if (ni < 0 || ni >= 9 || nj < 0 || nj >= 9) continue;
+                
+                const voisin     = tab_2[ni][nj];
+                const occupe     = voisin.classList.contains("selected") || voisin.classList.contains("fixed");
+                const estPrev1   = ni === prev_1[0] && nj === prev_1[1];
+                const estPrev2   = ni === prev_2[0] && nj === prev_2[1];
+                const estFin = ni === 8 && nj === 8;
+
+                if (occupe && !estPrev1 && !estPrev2 && !estFin) {
+                    return false;
+                }
+            }
+            return true
+       
+        }
+        function verif_voisin(x, y){
+            const tab = document.querySelectorAll(".case");
+            const tab_2 = Array.from({ length: 9 }, (_, i) =>
+                Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
+            );
+
+            const voisins = [
+                [x-1, y], [x, y-1], [x, y+1], [x+1, y]
+            ];
+            let count = 0
+            for (const [ni, nj] of voisins) {
+                // Hors grille → on ignore
+                if (ni < 0 || ni >= 9 || nj < 0 || nj >= 9) continue;
+                
+                const voisin     = tab_2[ni][nj];
+                const occupe     = voisin.classList.contains("selected") || voisin.classList.contains("fixed");
+                
+                if (occupe) {
+                    count ++
+                }
+            }
+            if (count == 0){
+                return false
+            }
+            return true
+        }
+
+        function verif_clic(x, y, prev_1){
+           const tab = document.querySelectorAll(".case");
+            const tab_2 = Array.from({ length: 9 }, (_, i) =>
+                Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
+            );
+
+            const voisins = [
+                [x-1, y], [x, y-1], [x, y+1], [x+1, y]
+            ];
+            for (let i = 0; i< 4;i++) {
+                if (voisins[i][0] == prev_1[0] && voisins[i][1] == prev_1[1]) {
+                    return true;
+                }
+            }       
+            return false;
+        }
+    </script>
 
 </body>
 
