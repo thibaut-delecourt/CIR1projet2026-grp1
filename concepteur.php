@@ -236,6 +236,85 @@
         }
 
 
+        .victory-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .victory-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .victory-box {
+            position: relative;
+            padding: 45px 65px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #123d18, #1f7a2e, #f5d76e);
+            border: 4px solid #f5d76e;
+            box-shadow:
+                0 0 25px rgba(245, 215, 110, 0.9),
+                0 0 60px rgba(31, 122, 46, 0.9);
+            text-align: center;
+            animation: victoryPop 0.8s ease forwards, victoryGlow 1.8s ease-in-out infinite;
+        }
+
+        .victory-title {
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: #fff6b0;
+            text-shadow:
+                0 0 8px #f5d76e,
+                0 0 18px #f5d76e,
+                0 0 35px #1bff5a;
+            animation: victoryText 1.2s ease-in-out infinite;
+        }
+
+        .victory-subtitle {
+            margin-top: 14px;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        input {
+            margin-top: 14px;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .victory-button {
+            margin-top: 28px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 999px;
+            background: #f5d76e;
+            color: #123d18;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #b99b32;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .victory-button:hover {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #b99b32;
+        }
+
+
     </style>
 </head>
 
@@ -292,6 +371,16 @@
             </div>
         </section>
     </main>
+    <div class="victory-overlay" id="victoryOverlay">
+        <div class="victory-box">
+            <div class="victory-title">VOUS AVEZ CREE VOTRE NIVEAU</div>
+            <div class="victory-subtitle">Le serpent relie bien la queue à la tête !</div>
+            <div class="victory-subtitle"> Nombres sur les colonnes :  <span id="colonne"></span></div>
+            <div class="victory-subtitle"> Nombres sur les lignes :   <span id="ligne"></span></div>
+            <button class="victory-button" onclick="location.href='concepteur.php';">Retour au concepteur</button>
+            <button class="victory-button" onclick="location.href='#';">Valider</button>
+        </div>
+    </div>
 
     <script>
 
@@ -335,6 +424,8 @@
         let tab_2 = Array.from({ length: 9 }, (_, i) =>
             Array.from({ length: 9 }, (_, j) => tab_cell[i * 9 + j]));
         let case_fausse = [0]
+        let row_count = [];
+        let col_count = [];
             cells.forEach((cell) => {
             cell.addEventListener("click", () => {
                 let x = parseInt(cell.classList[1], 10)
@@ -360,6 +451,11 @@
                         }
                         else{
                             tab.push([x,y])
+                            if((x == 7 && y == 8) || (x == 8 && y == 7)){
+                                row_count = parcour_ligne();
+                                col_count = parcour_col();
+                                afficherVictoire(col_count,row_count);
+                            }
                         } 
                     }
                     else{
@@ -370,9 +466,6 @@
                         let val = tab.pop()
                         tab_2[val[0]][val[1]].classList.remove("selected")
                     }
-
-                    let row_count = parcour_ligne();
-                    let col_count = parcour_col();
                 }
             });
         });
@@ -420,8 +513,6 @@
 
             return tab_count;
         }
-
-
         function verif_case(x, y, prev_1, prev_2) {
             const tab = document.querySelectorAll(".case");
             const tab_2 = Array.from({ length: 9 }, (_, i) =>
@@ -478,7 +569,6 @@
             }
             return true
         }
-
         function verif_clic(x, y, prev_1){
            const tab = document.querySelectorAll(".case");
             const tab_2 = Array.from({ length: 9 }, (_, i) =>
@@ -495,6 +585,18 @@
             }       
             return false;
         }
+
+        function afficherVictoire(nbr_col,nbr_ligne) {
+
+            const victoryOverlay = document.getElementById("victoryOverlay");
+            victoryOverlay.classList.add("show");
+
+            const col = nbr_col.join(", ");
+            const ligne = nbr_ligne.join(", ");
+            document.getElementById("colonne").textContent = col;
+            document.getElementById("ligne").textContent = ligne;
+        }
+
     </script>
 
 </body>
