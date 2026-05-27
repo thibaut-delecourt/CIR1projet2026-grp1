@@ -511,7 +511,10 @@
                     }
                     if(cell.classList.contains("selected")){
                         let v_case = verif_case(x, y, tab.at(-1), tab.at(-2))
-                        if (!v_case){
+                        if(!verif_clic(x, y, tab.at(-1))){
+                            cell.classList.toggle("selected");
+                        }
+                        else if (!v_case){
                             case_fausse = [x,y]
                             cell.classList.toggle("selected")
                             cell.classList.add("erreur")
@@ -677,7 +680,22 @@
             return true
         }
 
+        function verif_clic(x, y, prev_1){
+           const tab = document.querySelectorAll(".case");
+            const tab_2 = Array.from({ length: 9 }, (_, i) =>
+                Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
+            );
 
+            const voisins = [
+                [x-1, y], [x, y-1], [x, y+1], [x+1, y]
+            ];
+            for (let i = 0; i< 4;i++) {
+                if (voisins[i][0] == prev_1[0] && voisins[i][1] == prev_1[1]) {
+                    return true;
+                }
+            }       
+            return false;
+        }
         function afficherVictoire() {
             if (victoireDejaAffichee) {
                 return;
