@@ -410,12 +410,12 @@
         <div class="jungle-mist mist-2"></div>
 
         <div class="fireflies">
-            <span class="firefly firefly-1"></span>
-            <span class="firefly firefly-2"></span>
-            <span class="firefly firefly-3"></span>
-            <span class="firefly firefly-4"></span>
-            <span class="firefly firefly-5"></span>
-            <span class="firefly firefly-6"></span>
+            <span class="niveaufly firefly-1"></span>
+            <span class="niveaufly firefly-2"></span>
+            <span class="niveaufly firefly-3"></span>
+            <span class="niveaufly firefly-4"></span>
+            <span class="niveaufly firefly-5"></span>
+            <span class="niveaufly firefly-6"></span>
         </div>
     </div>
 
