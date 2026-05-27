@@ -570,11 +570,6 @@
             return true
         }
         function verif_clic(x, y, prev_1){
-           const tab = document.querySelectorAll(".case");
-            const tab_2 = Array.from({ length: 9 }, (_, i) =>
-                Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
-            );
-
             const voisins = [
                 [x-1, y], [x, y-1], [x, y+1], [x+1, y]
             ];
