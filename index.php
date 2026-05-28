@@ -56,7 +56,8 @@ else{
 }
 ?>
   <a href="rules.php" class="btn-rules-top">📜 Règles</a>
-  
+  <a href="importer.php" class="btn-rules-top" style="left:auto; right:24px;">📥 Importer</a>
+
   <div class="cards">
     <a href="Niveau.php" class="card card-aventure">
       <span class="card-icon">🗺️</span>
@@ -69,10 +70,6 @@ else{
     <a href="concepteur.php" class="card card-concepteur">
       <span class="card-icon">✏️</span>
       <span class="card-label">Concepteur</span>
-    </a>
-    <a href="importer.php" class="card card-concepteur">
-      <span class="card-icon">📥</span>
-      <span class="card-label">Importer</span>
     </a>
   </div>
   <a href="touches.php" class="card card-touches">
