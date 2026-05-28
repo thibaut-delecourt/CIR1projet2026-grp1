@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="style.css?v=2">
 
     <style>
+        #share-link-box {
+    display: none;
+    margin-top: 20px;
+}
+#share-link-input {
+    width: 340px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid #f5d76e;
+    background: #0c2f10;
+    color: #f5d76e;
+    font-size: 13px;
+    font-weight: bold;
+}
+#copy-confirm {
+    display: none;
+    color: #aeffb0;
+    font-weight: bold;
+    margin-left: 10px;
+}
         body {
             overflow-x: hidden;
         }
@@ -265,6 +285,8 @@
                 0 0 60px rgba(31, 122, 46, 0.9);
             text-align: center;
             animation: victoryPop 0.8s ease forwards, victoryGlow 1.8s ease-in-out infinite;
+           
+     
         }
 
         .victory-title {
@@ -379,9 +401,29 @@
             <div class="victory-subtitle"> Nombres sur les lignes :   <span id="ligne"></span></div>
             <button class="victory-button" onclick="location.href='concepteur.php';">Retour au concepteur</button>
             <button class="victory-button" onclick="location.href='#';">Valider</button>
+            <button class="victory-button" id="btnPartager" onclick="partagerNiveau()">Partager le niveau</button>
+            <div id="share-link-box">
+    <input id="share-link-input" type="text" readonly>
+    <br>
+    <button class="victory-button" style="margin-top:10px;" onclick="copierLien()"> Copier le lien</button>
+    <span id="copy-confirm"> Copié </span>
+</div>
         </div>
-    </div>
 
+</div>
+
+
+
+
+        <div style="position:fixed; top:26px; right:26px; z-index:2000; display:flex; gap:8px;">
+    <input id="import-input" type="text" placeholder="Coller le lien ici..."
+        style="padding:8px 12px; border-radius:8px; border:2px solid #f5d76e; background:#0c2f10; color:#f5d76e; font-size:13px; width:260px;">
+    <button onclick="importerNiveau()"
+        style="padding:8px 16px; border:none; border-radius:8px; background:#f5d76e; color:#123d18; font-weight:bold; cursor:pointer;">
+        Importer
+    </button>
+</div>
+  
     <script>
 
         const grid = document.getElementById("grid");
@@ -591,7 +633,49 @@
             document.getElementById("colonne").textContent = col;
             document.getElementById("ligne").textContent = ligne;
         }
+ function partagerNiveau() {
+    // Chemin complet du serpent (sans les deux premières entrées sentinelles [-1,-1] et [0,0])
+    // tab[0] = [-1,-1] (sentinelle), tab[1] = [0,0] (départ fixe), puis le chemin réel
+    const chemin = tab.slice(1); // on garde [0,0] comme premier point
 
+    const params = new URLSearchParams({
+        lignes: row_count.join(","),
+        colonnes: col_count.join(","),
+        chemin: chemin.map(c => c[0] + "-" + c[1]).join(",")
+    });
+
+    const lien = window.location.origin + "/jouer.php?" + params.toString();
+
+    const box = document.getElementById("share-link-box");
+    const input = document.getElementById("share-link-input");
+    box.style.display = "block";
+    input.value = lien;
+}
+
+function copierLien() {
+    const input = document.getElementById("share-link-input");
+    navigator.clipboard.writeText(input.value).then(() => {
+        const confirm = document.getElementById("copy-confirm");
+        confirm.style.display = "inline";
+        setTimeout(() => confirm.style.display = "none", 2500);
+    });
+}
+function importerNiveau() {
+    const lien = document.getElementById("import-input").value.trim();
+    const url = new URL(lien);
+    const lignes = url.searchParams.get("lignes").split(",").map(Number);
+    const colonnes = url.searchParams.get("colonnes").split(",").map(Number);
+
+    // Afficher les indices sur les lignes
+    document.querySelectorAll(".row-number").forEach((el, i) => {
+        el.textContent = lignes[i];
+    });
+
+    // Afficher les indices sur les colonnes
+    document.querySelectorAll(".col-number").forEach((el, i) => {
+        el.textContent = colonnes[i];
+    });
+}
     </script>
 
 </body>
