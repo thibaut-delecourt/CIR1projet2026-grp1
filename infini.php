@@ -48,7 +48,7 @@ session_start();
         .case.selected { background-color:#f5d76e; }
         .case.brouillon { background-color:#ae9e9e; }
         .case.erreur { background-color:#ff0000; }
-        .case.hint { background-color:#7fd1ff !important; opacity:0.85; }
+        .case.hint { outline:3px solid #7fd1ff; outline-offset:-3px; }
         .row-number, .col-number { display:flex; justify-content:center; align-items:center;
             color:#f5d76e; font-size:20px; font-weight:bold;
             text-shadow:0 2px 3px rgba(0,0,0,0.7); }
@@ -138,15 +138,19 @@ session_start();
 
 <script>
 /* ===================================================================
- *  COBRA - Mode Infini : front-end JS
- *  Communication avec le C via fetch() vers api/generer_niveau.php
- *  et api/resoudre_niveau.php.
+ *  COBRA - Mode Infini
+ *  Genere un niveau via api/generer_niveau.php (binaire C concepteur),
+ *  resoud via api/resoudre_niveau.php (binaire C solveur).
+ *  La gameplay (clics, pile tab, victoire) est IDENTIQUE a aventure_1.php
+ *  -- seulement encapsulee dans une fonction pour pouvoir etre relancee
+ *  a chaque nouveau niveau.
  * =================================================================== */
 
 let difficulte = 0;
-let niveauCourant = null;   // { rows, cols, solution, longueur, ... }
-let tab = [[-1,-1], [0,0]]; // pile des cases du serpent du joueur
-let victoireAffichee = false;
+let niveauCourant = null;
+let rowNumbers = [];
+let colNumbers = [];
+let victoireDejaAffichee = false;
 
 function setDiff(d) {
     difficulte = d;
@@ -158,185 +162,235 @@ function setDiff(d) {
 }
 
 async function nouveauNiveau() {
-    victoireAffichee = false;
+    victoireDejaAffichee = false;
     document.getElementById('victoryOverlay').classList.remove('show');
     document.getElementById('meta').textContent = 'Génération en cours…';
-
     try {
         const r = await fetch('api/generer_niveau.php?diff=' + difficulte);
         const data = await r.json();
         if (!data.ok) throw new Error(data.error || 'erreur inconnue');
         niveauCourant = data;
-        afficherNiveau(data);
+        rowNumbers = data.rows.slice();
+        colNumbers = data.cols.slice();
+        document.getElementById('meta').textContent =
+            'Longueur du serpent : ' + data.longueur +
+            ' / Difficulté : ' + ['facile','moyen','difficile'][data.difficulte] +
+            ' / seed : ' + data.seed;
+        construireGrille();
     } catch (e) {
         document.getElementById('meta').textContent =
             'Erreur lors de la génération : ' + e.message;
     }
 }
 
-function afficherNiveau(data) {
-    const grid = document.getElementById('grid');
-    grid.innerHTML = '';
-    tab = [[-1,-1], [0,0]];
+/* ---------------------------------------------------------------------
+ *  Construction de la grille + branchement des clics
+ *  -> COPIE QUASI A L'IDENTIQUE DE aventure_1.php pour fiabilite
+ * --------------------------------------------------------------------- */
+function construireGrille() {
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
 
     for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
-            const cell = document.createElement('div');
-            cell.classList.add('case');
+            const cell = document.createElement("div");
+            cell.classList.add("case");
             cell.classList.add(`${row}`);
             cell.classList.add(`${col}`);
             if ((row === 0 && col === 0) || (row === 8 && col === 8)) {
-                cell.classList.add('fixed');
+                cell.classList.add("fixed");
             }
             grid.appendChild(cell);
         }
-        const rn = document.createElement('div');
-        rn.classList.add('row-number');
-        rn.textContent = data.rows[row];
-        grid.appendChild(rn);
+        const rowNumber = document.createElement("div");
+        rowNumber.classList.add("row-number");
+        rowNumber.textContent = rowNumbers[row];
+        grid.appendChild(rowNumber);
     }
+
     for (let col = 0; col < 9; col++) {
-        const cn = document.createElement('div');
-        cn.classList.add('col-number');
-        cn.textContent = data.cols[col];
-        grid.appendChild(cn);
+        const colNumber = document.createElement("div");
+        colNumber.classList.add("col-number");
+        colNumber.textContent = colNumbers[col];
+        grid.appendChild(colNumber);
     }
 
-    document.getElementById('meta').textContent =
-        'Longueur du serpent : ' + data.longueur +
-        ' / Difficulté : ' + ['facile','moyen','difficile'][data.difficulte] +
-        ' / seed : ' + data.seed;
+    /* -- exactement la meme logique que aventure_1.php -- */
+    const cells = document.querySelectorAll(".case");
+    let prev_2 = [-1, -1];
+    let prev_1 = [0, 0];
+    let tab = [prev_2, prev_1];
+    let tab_cell = document.querySelectorAll(".case");
+    let tab_2 = Array.from({ length: 9 }, (_, i) =>
+        Array.from({ length: 9 }, (_, j) => tab_cell[i * 9 + j]));
+    let case_fausse = [0];
 
-    brancherClics();
-}
+    cells.forEach((cell) => {
+        cell.addEventListener("click", () => {
+            let x = parseInt(cell.classList[1], 10);
+            let y = parseInt(cell.classList[2], 10);
+            if (isNaN(y)) { y = x; }
+            if (!cell.classList.contains("fixed") && verif_voisin(x, y)) {
+                cell.classList.toggle("selected");
+                if (case_fausse.length == 2) {
+                    tab_2[case_fausse[0]][case_fausse[1]].classList.remove("erreur");
+                    case_fausse = NaN;
+                }
+                if (cell.classList.contains("selected")) {
+                    let v_case = verif_case(x, y, tab.at(-1), tab.at(-2));
+                    if (!verif_clic(x, y, tab.at(-1))) {
+                        cell.classList.toggle("selected");
+                    } else if (!v_case) {
+                        case_fausse = [x, y];
+                        cell.classList.toggle("selected");
+                        cell.classList.add("erreur");
+                    } else {
+                        tab.push([x, y]);
+                    }
+                } else {
+                    while ((tab.at(-1)[0] != x) || (tab.at(-1)[1] != y)) {
+                        let val = tab.pop();
+                        tab_2[val[0]][val[1]].classList.remove("selected");
+                    }
+                    let val = tab.pop();
+                    tab_2[val[0]][val[1]].classList.remove("selected");
+                }
 
-function brancherClics() {
-    document.querySelectorAll('.case').forEach(cell => {
-        cell.addEventListener('click', () => clicCase(cell));
-        cell.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            if (!cell.classList.contains('fixed')) {
-                cell.classList.toggle('brouillon');
+                let row_count = parcour_ligne();
+                let correct_row = 0;
+                for (let i = 0; i < 9; i++) {
+                    if (row_count[i] > rowNumbers[i]) {
+                        document.querySelectorAll(".row-number")[i].style.color = "#ff0000";
+                    } else if (row_count[i] == rowNumbers[i]) {
+                        correct_row++;
+                        document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
+                    } else {
+                        document.querySelectorAll(".row-number")[i].style.color = "#f5d76e";
+                    }
+                }
+
+                let col_count = parcour_col();
+                let correct_col = 0;
+                for (let i = 0; i < 9; i++) {
+                    if (col_count[i] > colNumbers[i]) {
+                        document.querySelectorAll(".col-number")[i].style.color = "#ff0000";
+                    } else if (col_count[i] == colNumbers[i]) {
+                        correct_col++;
+                        document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
+                    } else {
+                        document.querySelectorAll(".col-number")[i].style.color = "#f5d76e";
+                    }
+                }
+                if (correct_col == 9 && correct_row == 9) {
+                    afficherVictoire();
+                }
+            }
+        });
+    });
+
+    /* clic droit : mode brouillon (gris) */
+    cells.forEach((cell) => {
+        cell.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            if (!cell.classList.contains("fixed")) {
+                cell.classList.toggle("brouillon");
             }
         });
     });
 }
 
-function clicCase(cell) {
-    const x = parseInt(cell.classList[1], 10);
-    const y = parseInt(cell.classList[2], 10);
-    if (cell.classList.contains('fixed')) return;
-    if (!verifVoisin(x, y)) return;
-
-    cell.classList.toggle('selected');
-    if (cell.classList.contains('selected')) {
-        const last = tab[tab.length-1];
-        const prev = tab[tab.length-2] || [-1,-1];
-        if (!verifClic(x, y, last) || !verifCase(x, y, last, prev)) {
-            cell.classList.toggle('selected');
-            return;
-        }
-        tab.push([x,y]);
-    } else {
-        /* on remet en arriere jusqu'a la case cliquee */
-        while (tab.length > 2 && (tab[tab.length-1][0] !== x || tab[tab.length-1][1] !== y)) {
-            const v = tab.pop();
-            const c = document.querySelector('.case.' + v[0] + '.' + v[1]);
-            if (c) c.classList.remove('selected');
-        }
-        tab.pop();
-    }
-
-    /* mise a jour des indices */
-    majIndices();
-    verifierVictoire();
-}
-
-function majIndices() {
-    const rowCount = parcourLigne();
-    const colCount = parcourCol();
-    const rns = document.querySelectorAll('.row-number');
-    const cns = document.querySelectorAll('.col-number');
+function parcour_ligne() {
+    const tab = document.querySelectorAll(".case");
+    let tab_count = [];
     for (let i = 0; i < 9; i++) {
-        rns[i].style.color = (rowCount[i] > niveauCourant.rows[i]) ? '#ff0000' : '#f5d76e';
-        cns[i].style.color = (colCount[i] > niveauCourant.cols[i]) ? '#ff0000' : '#f5d76e';
-    }
-}
-
-function parcourLigne() {
-    const cells = document.querySelectorAll('.case');
-    const out = [];
-    for (let i = 0; i < 9; i++) {
-        let n = 0;
+        let count = 0;
         for (let j = 0; j < 9; j++) {
-            const c = cells[i*9+j];
-            if (c.classList.contains('selected') || c.classList.contains('fixed')) n++;
+            if (tab[i * 9 + j].classList.contains("selected")
+             || tab[i * 9 + j].classList.contains("fixed")) {
+                count += 1;
+            }
         }
-        out.push(n);
+        tab_count.push(count);
     }
-    return out;
+    return tab_count;
 }
-function parcourCol() {
-    const cells = document.querySelectorAll('.case');
-    const out = [];
+
+function parcour_col() {
+    const tab = document.querySelectorAll(".case");
+    let tab_count = [];
     for (let i = 0; i < 9; i++) {
-        let n = 0;
+        let count = 0;
         for (let j = 0; j < 9; j++) {
-            const c = cells[j*9+i];
-            if (c.classList.contains('selected') || c.classList.contains('fixed')) n++;
+            if (tab[j * 9 + i].classList.contains("selected")
+             || tab[j * 9 + i].classList.contains("fixed")) {
+                count += 1;
+            }
         }
-        out.push(n);
+        tab_count.push(count);
     }
-    return out;
+    return tab_count;
 }
 
-function verifClic(x, y, prev) {
-    const v = [[x-1,y],[x,y-1],[x,y+1],[x+1,y]];
-    return v.some(([a,b]) => a === prev[0] && b === prev[1]);
-}
-
-function verifVoisin(x, y) {
-    const cells = document.querySelectorAll('.case');
-    const v = [[x-1,y],[x,y-1],[x,y+1],[x+1,y]];
-    return v.some(([a,b]) => {
-        if (a<0||a>=9||b<0||b>=9) return false;
-        const c = cells[a*9+b];
-        return c.classList.contains('selected') || c.classList.contains('fixed');
-    });
-}
-
-function verifCase(x, y, p1, p2) {
-    const cells = document.querySelectorAll('.case');
+function verif_case(x, y, prev_1, prev_2) {
+    const tab = document.querySelectorAll(".case");
+    const tab_2 = Array.from({ length: 9 }, (_, i) =>
+        Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
+    );
     const voisins = [
-        [x-1,y-1],[x-1,y],[x-1,y+1],
-        [x,  y-1],         [x,  y+1],
-        [x+1,y-1],[x+1,y],[x+1,y+1]
+        [x-1, y-1], [x-1, y], [x-1, y+1],
+        [x,   y-1],            [x,   y+1],
+        [x+1, y-1], [x+1, y], [x+1, y+1]
     ];
-    for (const [a,b] of voisins) {
-        if (a<0||a>=9||b<0||b>=9) continue;
-        const c = cells[a*9+b];
-        const occupe = c.classList.contains('selected') || c.classList.contains('fixed');
-        const ep1 = a===p1[0] && b===p1[1];
-        const ep2 = a===p2[0] && b===p2[1];
-        const fin = a===8 && b===8;
-        if (occupe && !ep1 && !ep2 && !fin) return false;
+    for (const [ni, nj] of voisins) {
+        if (ni < 0 || ni >= 9 || nj < 0 || nj >= 9) continue;
+        const voisin = tab_2[ni][nj];
+        const occupe = voisin.classList.contains("selected") || voisin.classList.contains("fixed");
+        const estPrev1 = ni === prev_1[0] && nj === prev_1[1];
+        const estPrev2 = ni === prev_2[0] && nj === prev_2[1];
+        const estFin = ni === 8 && nj === 8;
+        if (occupe && !estPrev1 && !estPrev2 && !estFin) {
+            return false;
+        }
     }
     return true;
 }
 
-function verifierVictoire() {
-    if (victoireAffichee) return;
-    const rowC = parcourLigne(), colC = parcourCol();
-    for (let i = 0; i < 9; i++) {
-        if (rowC[i] !== niveauCourant.rows[i]) return;
-        if (colC[i] !== niveauCourant.cols[i]) return;
+function verif_voisin(x, y) {
+    const tab = document.querySelectorAll(".case");
+    const tab_2 = Array.from({ length: 9 }, (_, i) =>
+        Array.from({ length: 9 }, (_, j) => tab[i * 9 + j])
+    );
+    const voisins = [[x-1, y], [x, y-1], [x, y+1], [x+1, y]];
+    let count = 0;
+    for (const [ni, nj] of voisins) {
+        if (ni < 0 || ni >= 9 || nj < 0 || nj >= 9) continue;
+        const voisin = tab_2[ni][nj];
+        const occupe = voisin.classList.contains("selected") || voisin.classList.contains("fixed");
+        if (occupe) count++;
     }
-    victoireAffichee = true;
+    return count !== 0;
+}
+
+function verif_clic(x, y, prev_1) {
+    const voisins = [[x-1, y], [x, y-1], [x, y+1], [x+1, y]];
+    for (let i = 0; i < 4; i++) {
+        if (voisins[i][0] == prev_1[0] && voisins[i][1] == prev_1[1]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function afficherVictoire() {
+    if (victoireDejaAffichee) return;
+    victoireDejaAffichee = true;
     document.getElementById('victoryOverlay').classList.add('show');
 }
 
-/* Demande au solveur C l'emplacement du serpent solution et le montre
- * en surbrillance bleue. Tres utile en oral pour montrer le solveur. */
+/* ---------------------------------------------------------------------
+ *  Bouton "Indice (solveur)" : appelle le solveur C et marque en bleu
+ *  les cases solution.
+ * --------------------------------------------------------------------- */
 async function montrerSolution() {
     if (!niveauCourant) return;
     try {
@@ -364,7 +418,6 @@ async function montrerSolution() {
     }
 }
 
-/* lance le premier niveau au chargement */
 nouveauNiveau();
 </script>
 </body>
