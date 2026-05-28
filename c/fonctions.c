@@ -41,11 +41,14 @@ bool case_existe(int x, int y) {
 
 bool verif_case(int x, int y, int prev_1[2], int prev_2[2],
                 int matrice[N][N]) {
-    /* La case ne doit pas etre adjacente diagonalement a la queue,
-     * sinon elle "touche" la queue par le coin -> illegal. */
-    if (x + 1 == N - 1 && y + 1 == N - 1) {
-        return false;
-    }
+    /* IMPORTANT : on N'AJOUTE PAS d'early-return interdisant la case
+     * (N-2, N-2) (diagonale a la queue). Le JS de aventure_1.php /
+     * concepteur.php considere la queue comme une exception
+     * (`estFin`) au critere "pas de voisin occupe en diagonale", donc
+     * les niveaux crees a la main peuvent passer par (N-2, N-2).
+     * Le C doit suivre la meme regle, sinon le solveur ne trouve plus
+     * de solution sur ces niveaux. La logique correcte est dans la
+     * boucle ci-dessous via `estFin`. */
 
     const int voisins[8][2] = {
         {x - 1, y - 1}, {x - 1, y    }, {x - 1, y + 1},
