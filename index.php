@@ -70,6 +70,10 @@ else{
       <span class="card-icon">✏️</span>
       <span class="card-label">Concepteur</span>
     </a>
+    <a href="importer.php" class="card card-concepteur">
+      <span class="card-icon">📥</span>
+      <span class="card-label">Importer</span>
+    </a>
   </div>
   <a href="touches.php" class="card card-touches">
       <span class="card-icon">⌨️​</span>

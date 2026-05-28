@@ -415,15 +415,8 @@
 
 
 
-        <div style="position:fixed; top:26px; right:26px; z-index:2000; display:flex; gap:8px;">
-    <input id="import-input" type="text" placeholder="Coller le lien ici..."
-        style="padding:8px 12px; border-radius:8px; border:2px solid #f5d76e; background:#0c2f10; color:#f5d76e; font-size:13px; width:260px;">
-    <button onclick="importerNiveau()"
-        style="padding:8px 16px; border:none; border-radius:8px; background:#f5d76e; color:#123d18; font-weight:bold; cursor:pointer;">
-        Importer
-    </button>
-</div>
-  
+        <!-- L'import est desormais sur sa page dediee : importer.php (voir l'accueil) -->
+
     <script>
 
         const grid = document.getElementById("grid");
@@ -660,22 +653,7 @@ function copierLien() {
         setTimeout(() => confirm.style.display = "none", 2500);
     });
 }
-function importerNiveau() {
-    const lien = document.getElementById("import-input").value.trim();
-    const url = new URL(lien);
-    const lignes = url.searchParams.get("lignes").split(",").map(Number);
-    const colonnes = url.searchParams.get("colonnes").split(",").map(Number);
-
-    // Afficher les indices sur les lignes
-    document.querySelectorAll(".row-number").forEach((el, i) => {
-        el.textContent = lignes[i];
-    });
-
-    // Afficher les indices sur les colonnes
-    document.querySelectorAll(".col-number").forEach((el, i) => {
-        el.textContent = colonnes[i];
-    });
-}
+// importerNiveau() a ete deplacee dans importer.php (page dediee a l'import).
     </script>
 
 </body>
