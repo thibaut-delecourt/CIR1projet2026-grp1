@@ -68,6 +68,34 @@ session_start();
         .victory-button { margin-top:20px; padding:12px 28px; border:none; border-radius:999px;
             background:#f5d76e; color:#123d18; font-size:18px; font-weight:bold;
             cursor:pointer; box-shadow:0 6px 0 #b99b32; }
+
+        /* Boite de partage du lien (apparait apres clic sur "Partager") */
+        #share-link-box {
+            display: none;
+            margin: 14px auto 0;
+            padding: 12px;
+            background: rgba(12, 55, 20, 0.85);
+            border: 2px solid #f5d76e;
+            border-radius: 12px;
+            max-width: 600px;
+            text-align: center;
+        }
+        #share-link-input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 2px solid #f5d76e;
+            background: #0c2f10;
+            color: #f5d76e;
+            font-size: 13px;
+            font-family: monospace;
+        }
+        #copy-confirm {
+            display: none;
+            margin-left: 12px;
+            color: #8dff9c;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -115,6 +143,17 @@ session_start();
             <button id="btn-diff-2" onclick="setDiff(2)">Difficile</button>
             <button onclick="nouveauNiveau()">Nouveau niveau</button>
             <button onclick="montrerSolution()" title="Affiche la solution calcul&eacute;e par le solveur C">Indice (solveur)</button>
+            <button onclick="partagerNiveau()" title="Copie un lien r&eacute;utilisable dans le concepteur">Partager le niveau</button>
+        </div>
+
+        <div id="share-link-box">
+            <input id="share-link-input" type="text" readonly>
+            <br>
+            <button class="victory-button" style="margin-top:10px;" onclick="copierLien()">Copier le lien</button>
+            <span id="copy-confirm">Copi&eacute;&nbsp;!</span>
+            <p style="color:#fdf6e3; font-size:13px; margin-top:10px;">
+                Colle ce lien dans la case « Coller le lien ici&hellip; » du <a href="concepteur.php" style="color:#f5d76e;">concepteur</a>.
+            </p>
         </div>
 
         <div class="info" id="meta">Chargement du premier niveau&hellip;</div>
@@ -391,6 +430,70 @@ function afficherVictoire() {
  *  Bouton "Indice (solveur)" : appelle le solveur C et marque en bleu
  *  les cases solution.
  * --------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+ *  Partage du niveau courant -- meme format de lien que concepteur.php
+ *  pour etre re-importable via sa boite "Coller le lien ici...".
+ *
+ *  Format produit (compatible avec importerNiveau() dans concepteur.php) :
+ *     <origin>/jouer.php?lignes=1,2,...&colonnes=2,5,...&chemin=0-0,1-0,1-1,...,8-8
+ * --------------------------------------------------------------------- */
+function partagerNiveau() {
+    if (!niveauCourant) {
+        alert('Aucun niveau a partager pour le moment.');
+        return;
+    }
+
+    /* On reconstruit le chemin du serpent a partir de la grille solution
+     * renvoyee par le concepteur C. On part de (0,0) et on suit les
+     * voisins 4-connexes occupes (1 ou 2) jusqu'a (8,8). */
+    const sol = niveauCourant.solution;
+    const chemin = [];
+    const vu = Array.from({length:9}, () => Array(9).fill(false));
+    let cx = 0, cy = 0;
+    chemin.push([cx, cy]);
+    vu[cx][cy] = true;
+    const N = 9;
+    while (!(cx === N-1 && cy === N-1)) {
+        const voisins = [[cx-1,cy],[cx+1,cy],[cx,cy-1],[cx,cy+1]];
+        let suivant = null;
+        for (const [nx, ny] of voisins) {
+            if (nx<0||nx>=N||ny<0||ny>=N) continue;
+            if (vu[nx][ny]) continue;
+            if (sol[nx][ny] === 1 || sol[nx][ny] === 2) { suivant = [nx, ny]; break; }
+        }
+        if (!suivant) break; /* securite : ne devrait jamais arriver */
+        chemin.push(suivant);
+        vu[suivant[0]][suivant[1]] = true;
+        cx = suivant[0]; cy = suivant[1];
+    }
+
+    const params = new URLSearchParams({
+        lignes:   niveauCourant.rows.join(","),
+        colonnes: niveauCourant.cols.join(","),
+        chemin:   chemin.map(c => c[0] + "-" + c[1]).join(",")
+    });
+
+    /* Meme format que concepteur.php : on garde l'URL "jouer.php" meme
+     * si la page n'existe pas - seules les query-params comptent pour
+     * importerNiveau(). */
+    const lien = window.location.origin + "/jouer.php?" + params.toString();
+
+    const box = document.getElementById("share-link-box");
+    const input = document.getElementById("share-link-input");
+    box.style.display = "block";
+    input.value = lien;
+    input.select();
+}
+
+function copierLien() {
+    const input = document.getElementById("share-link-input");
+    navigator.clipboard.writeText(input.value).then(() => {
+        const confirm = document.getElementById("copy-confirm");
+        confirm.style.display = "inline";
+        setTimeout(() => confirm.style.display = "none", 2500);
+    });
+}
+
 async function montrerSolution() {
     if (!niveauCourant) return;
     try {
