@@ -78,6 +78,7 @@ session_start();
         .case.selected { background-color:#f5d76e; }
         .case.brouillon { background-color:#ae9e9e; }
         .case.erreur { background-color:#ff0000; }
+        .case.hint { outline:3px solid #7fd1ff; outline-offset:-3px; }
         .row-number, .col-number { display:flex; justify-content:center; align-items:center;
             color:#f5d76e; font-size:20px; font-weight:bold;
             text-shadow:0 2px 3px rgba(0,0,0,0.7); }
@@ -137,6 +138,7 @@ session_start();
                    placeholder="Coller le lien ici (ex: http://localhost/jouer.php?lignes=...&colonnes=...)">
             <button onclick="importerNiveau()">Importer</button>
             <button class="secondary" onclick="reinitialiser()">R&eacute;initialiser</button>
+            <button class="secondary" onclick="montrerSolution()" title="Affiche la solution calcul&eacute;e par le solveur C">Solution</button>
         </div>
 
         <div class="info" id="info">
@@ -432,6 +434,50 @@ function afficherVictoire() {
     if (victoireDejaAffichee) return;
     victoireDejaAffichee = true;
     document.getElementById("victoryOverlay").classList.add("show");
+}
+
+/* ---------------------------------------------------------------------
+ *  Bouton "Solution" : envoie rows/cols au solveur C (api/resoudre_niveau.php)
+ *  et trace en bleu (.hint) les cases de la solution. N'efface pas les
+ *  cases deja cliquees par le joueur : l'overlay vient juste s'ajouter.
+ * --------------------------------------------------------------------- */
+async function montrerSolution() {
+    const info = document.getElementById("info");
+    info.classList.remove("error");
+
+    if (!niveauImporte) {
+        info.textContent = "Importez d'abord un niveau avant de demander la solution.";
+        info.classList.add("error");
+        return;
+    }
+
+    info.textContent = "Calcul de la solution par le solveur C...";
+
+    try {
+        const r = await fetch('api/resoudre_niveau.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ rows: rowNumbers, cols: colNumbers })
+        });
+        const data = await r.json();
+        if (!data.ok) {
+            info.textContent = "Solveur: " + (data.error || 'erreur inconnue');
+            info.classList.add("error");
+            return;
+        }
+        const cells = document.querySelectorAll('.case');
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                const c = cells[i * 9 + j];
+                c.classList.remove('hint');
+                if (data.solution[i][j] === 1) c.classList.add('hint');
+            }
+        }
+        info.textContent = "Solution affichee en bleu (" + data.longueur + " cases).";
+    } catch (e) {
+        info.textContent = "Erreur fetch solveur : " + e.message;
+        info.classList.add("error");
+    }
 }
 
 /* Si l'utilisateur arrive avec un lien direct (?lignes=...&colonnes=...)
