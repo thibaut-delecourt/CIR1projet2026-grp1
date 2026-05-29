@@ -395,17 +395,17 @@
     </main>
     <div class="victory-overlay" id="victoryOverlay">
         <div class="victory-box">
-            <div class="victory-title">VOUS AVEZ CREE VOTRE NIVEAU</div>
-            <div class="victory-subtitle">Le serpent relie bien la queue à la tête !</div>
-            <div class="victory-subtitle"> Nombres sur les colonnes :  <span id="colonne"></span></div>
-            <div class="victory-subtitle"> Nombres sur les lignes :   <span id="ligne"></span></div>
-            <button class="victory-button" onclick="location.href='concepteur.php';">Retour au concepteur</button>
-            <button class="victory-button" onclick="location.href='#';">Valider</button>
-            <button class="victory-button" id="btnPartager" onclick="partagerNiveau()">Partager le niveau</button>
+            <div class="victory-title">You have created your level</div>
+            <div class="victory-subtitle">The snake is successfully linking the head to the tail!</div>
+            <div class="victory-subtitle"> Numbers on the collumn :  <span id="colonne"></span></div>
+            <div class="victory-subtitle"> Numbers on the row :   <span id="ligne"></span></div>
+            <button class="victory-button" onclick="location.href='concepteur.php';">Return to designer</button>
+            <button class="victory-button" onclick="location.href='#';">Validate</button>
+            <button class="victory-button" id="btnPartager" onclick="partagerNiveau()">share my level</button>
             <div id="share-link-box">
     <input id="share-link-input" type="text" readonly>
     <br>
-    <button class="victory-button" style="margin-top:10px;" onclick="copierLien()"> Copier le lien</button>
+    <button class="victory-button" style="margin-top:10px;" onclick="copierLien()"> Copy link</button>
     <span id="copy-confirm"> Copié </span>
 </div>
         </div>

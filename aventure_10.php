@@ -443,7 +443,7 @@
 
     <div class="victory-overlay" id="victoryOverlay">
         <div class="victory-box">
-            <div class="victory-title">VICTOIRE</div>
+            <div class="victory-title">Victory</div>
             <div class="victory-subtitle">Le serpent relie bien la queue à la tête !</div>
             <div class="victory-countdown" id="victoryCountdown">
                 Réinitialisation automatique dans 15 secondes.
