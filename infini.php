@@ -142,14 +142,14 @@ session_start();
             <button id="btn-diff-1" onclick="setDiff(1)">medium</button>
             <button id="btn-diff-2" onclick="setDiff(2)">Difficult</button>
             <button onclick="nouveauNiveau()">New level</button>
-            <button onclick="montrerSolution()" title="Affiche la solution calcul&eacute;e par le solveur C">Clue (solver)</button>
+            <button onclick="montrerSolution()" title="Affiche la solution calcul&eacute;e par le solveur C">Solution (solver)</button>
             <button onclick="partagerNiveau()" title="Copie un lien r&eacute;utilisable dans le concepteur">Share level</button>
         </div>
 
         <div id="share-link-box">
             <input id="share-link-input" type="text" readonly>
             <br>
-            <button class="victory-button" style="margin-top:10px;" onclick="copierLien()">Copier le lien</button>
+            <button class="victory-button" style="margin-top:10px;" onclick="copierLien()">Copie the link</button>
             <span id="copy-confirm">Copied!</span>
             <p style="color:#fdf6e3; font-size:13px; margin-top:10px;">
                 Paste this link into the "Paste link here..." box of the<a href="concepteur.php" style="color:#f5d76e;">designer</a>.
