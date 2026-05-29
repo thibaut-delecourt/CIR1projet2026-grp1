@@ -419,7 +419,7 @@
         </div>
     </div>
 
-    <a href="niveau.php" class="btn-back">← Accueil Aventure</a>
+    <a href="niveau.php" class="btn-back">← Adventure Home</a>
 
     <main class="page">
         <h1 class="logo">COBRA</h1>

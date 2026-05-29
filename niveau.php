@@ -423,7 +423,7 @@
       </div>
   </div>
 
-    <a href="index.php" class="btn-back">← Accueil</a>
+    <a href="index.php" class="btn-back">← Home</a>
 
      <div class="cards-vertical">
     <a href="aventure_1.php" class="card card-aventure">
