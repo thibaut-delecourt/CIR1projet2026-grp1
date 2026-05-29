@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COBRA - Importer un niveau</title>
+    <title>COBRA - Import a level</title>
     <link rel="icon" type="image/x-icon" href="images/CobraLogo.png">
     <link rel="stylesheet" href="style.css?v=2">
 
@@ -127,22 +127,22 @@ session_start();
         </div>
     </div>
 
-    <a href="index.php" class="btn-back">&larr; Accueil</a>
+    <a href="index.php" class="btn-back">&larr; Home</a>
 
     <main class="page">
         <h1 class="logo">COBRA</h1>
-        <p class="logo-sub">Importer un niveau partag&eacute;</p>
+        <p class="logo-sub">Import a shared level</p>
 
         <div class="import-bar">
             <input id="import-input" type="text"
-                   placeholder="Coller le lien ici (ex: http://localhost/jouer.php?lignes=...&colonnes=...)">
-            <button onclick="importerNiveau()">Importer</button>
-            <button class="secondary" onclick="reinitialiser()">R&eacute;initialiser</button>
+                   placeholder="Paste the link here (ex: http://localhost/jouer.php?lignes=...&colonnes=...)">
+            <button onclick="importerNiveau()">Import</button>
+            <button class="secondary" onclick="reinitialiser()">Reset</button>
             <button class="secondary" onclick="montrerSolution()" title="Affiche la solution calcul&eacute;e par le solveur C">Solution</button>
         </div>
 
         <div class="info" id="info">
-            Colle un lien partag&eacute; depuis le mode Infini ou le Concepteur, puis clique « Importer ».
+            Paste a shared link from Infinite mode or the Designer, then click "Import"
         </div>
 
         <section class="game-zone">
@@ -154,12 +154,12 @@ session_start();
 
     <div class="victory-overlay" id="victoryOverlay">
         <div class="victory-box">
-            <div class="victory-title">VICTOIRE</div>
+            <div class="victory-title">VICTORY</div>
             <p style="color:white; font-size:18px; margin-top:14px;">
-                Le serpent relie bien la queue &agrave; la t&ecirc;te !
+                The snake connects its tail to its head perfectly!
             </p>
-            <button class="victory-button" onclick="reinitialiser()">Rejouer</button>
-            <button class="victory-button" onclick="location.href='index.php';">Accueil</button>
+            <button class="victory-button" onclick="reinitialiser()">Replay</button>
+            <button class="victory-button" onclick="location.href='index.php';">Home</button>
         </div>
     </div>
 

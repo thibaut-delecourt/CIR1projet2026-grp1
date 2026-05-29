@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COBRA — Créer un compte</title>
+  <title>COBRA — Create an account</title>
   <link rel="stylesheet" href="style.css?v=2">
   <style>
     
@@ -71,38 +71,38 @@
     </div>
   </div>
 
-  <a href="login.php" class="btn-back">← Connexion</a>
+  <a href="login.php" class="btn-back">← Login</a>
   
 
   <main class="page form-page">
     <div class="form-box">
       <div class="form-title">COBRA</div>
-      <p class="form-hint">Rejoins l'aventure</p>
+      <p class="form-hint">Join the adventure</p>
 
       <form method="post" action="php/ajout.php">
 
       <div class="field">
-        <label for="email">Adresse e-mail</label>
+        <label for="email">E-mail address</label>
         <input type="text" id="email" name="email" placeholder="ton@email.com" required pattern=".*@.*"/>
       </div>
 
       <div class="field">
-        <label for="password">Mot de passe</label>
+        <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="••••••••" required/>
       </div>
 
       <div class="check-row">
         <input type="checkbox" id="terms" required/>
-        <label for="terms">J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a></label>
+        <label for="terms"> I accept the <a href="#">terms of use</a> and the <a href="#">privacy policy</a></label>
       </div>
 
-      <input Type="submit" name="creer_mon_compte" value="Creer mon compte" class="btn-submit">
+      <input Type="submit" name="creer_mon_compte" value="Create an account" class="btn-submit">
 
     </form>
 
 
       <p class="form-foot">
-        Déjà un compte ? <a href="login.php">Se connecter</a>
+        Already have an account ? <a href="login.php">Login</a>
       </p>
     </div>
   </main>

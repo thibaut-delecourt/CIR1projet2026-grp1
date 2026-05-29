@@ -6,7 +6,7 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COBRA - Règles du Jeu</title>
+  <title>COBRA - Draft Rules of the Game</title>
   <link rel="icon" type="image/x-icon" href="../images/CobraTeams.ico">
   
   <link rel="stylesheet" href="style.css">
@@ -46,49 +46,49 @@ session_start();
 </div>
 
 <main class="page">
-  <a href="index.php" class="btn-back">← Retour</a>
+  <a href="index.php" class="btn-back">← Back</a>
 
-  <h1 class="logo">RÈGLES</h1>
+  <h1 class="logo">RULES</h1>
   <p class="logo-sub">
-    Et présentation des
-    différents modes de jeu
+    And an introduction to the
+    different game modes
   </p>
 
  <div class="rules-box">
 
  <section class="rules-section logic rules">
     <div class="rules-text" style="max-width: 100%;">
-      <h2><span>🐍</span> Le Serpent (Snake / Tunnel)</h2>
+      <h2><span>🐍</span> The snake (Snake / Tunnel)</h2>
       <p class="intro">
-        Le <strong>Serpent</strong> est un jeu de logique se déroulant sur une grille de cases. 
-        Le but est de tracer un serpent, reliant sa tête à sa queue, sans pour autant que différentes 
-        lignes ou colonnes de son corps se touchent (cela vaut aussi en diagonale). 
+        The <strong>Snake</strong> is a logic puzzle played on a grid of squares.
+        The goal is to draw a snake, connecting its head to its tail, without any lines or 
+        columns of its body touching (this also applies diagonally). 
       </p>
 
       <div class="divider" style="marginn: 15px 0;"></div>
 
-      <h3>Comment jouer ?</h3>
+      <h3>How to play ?</h3>
       <ul style="list-style-type: none; padding-left: 0; margin-bottom: 20px;">
         <li style="margin-bottom: 12px; position: relative; padding-left: 24px; color: #fdf6e3;">
           <span style="position: absolute; left: 0; color: #a8d832;">■</span>
-          <strong>Départ et Arrivée :</strong> Les deux cases initialement marquées/grisées sur la grille représentent la tête et la queue du serpent.
+          <strong>Departure and Arrival :</strong> The two squares initially marked/greyed out on the grid represent the head and tail of the snake.
         </li>
         <li style="margin-bottom: 12px; position: relative; padding-left: 24px; color: #fdf6e3;">
           <span style="position: absolute; left: 0; color: #a8d832;">■</span>
-          <strong>Le Corps du Serpent :</strong> Vous devez former une ligne continue (un chemin de cases noires) qui connecte ces deux extrémités.
+          <strong>The Serpent's Body :</strong> You must form a continuous line (a path of black squares) that connects these two ends.
         </li>
         <li style="margin-bottom: 12px; position: relative; padding-left: 24px; color: #fdf6e3;">
           <span style="position: absolute; left: 0; color: #a8d832;">■</span>
-          <strong>Les Indices Numériques :</strong> Les numéros situés à l'extérieur (en bas et à droite de la grille) indiquent le nombre exact de cases qui doivent être noircies dans la ligne ou la colonne correspondante.
+          <strong>Numerical Indices:</strong> The numbers located outside (bottom and right of the grid) indicate the exact number of squares that must be blackened in the corresponding row or column.
         </li>
         <li style="margin-bottom: 12px; position: relative; padding-left: 24px; color: #fdf6e3;">
           <span style="position: absolute; left: 0; color: #a8d832;">■</span>
-          <strong>Interdiction de se toucher :</strong> La ligne noire du serpent ne peut <strong>jamais se croiser</strong> ou se toucher elle-même, pas même en diagonale par le coin d'une case. Chaque case noire du chemin ne doit toucher ses voisines du serpent que par ses côtés (haut, bas, gauche, droite).
+          <strong>No touching :</strong> The black line of the snake can <strong>never cross</strong> or touch itself, not even diagonally through the corner of a square. Each black square on the path must only touch its neighbors on the snake by its sides (top, bottom, left, right).
         </li>
       </ul>
       <div style="background: rgba(0, 0, 0, 0.3); border-left: 4px solid #3daa47; border-radius: 6px; padding: 15px; margin-top: 15px;">
         <p style="margin: 0; color: #8dff9c; font-style: italic; font-size: 14px;">
-          💡 <strong>Astuce :</strong> Utilisez les indices les plus grands ou les plus petits (comme le 1 ou les nombres proches de la taille maximale de la grille) pour commencer à déduire l'emplacement des cases !
+          💡 <strong>Trick:</strong> Use the largest or smallest clues (like 1 or numbers close to the maximum grid size) to start deducing the location of the squares!
         </p>
       </div>
     </div>
@@ -98,8 +98,8 @@ session_start();
   
   <section class="rules-section">
     <div class="rules-text">
-      <h2><span>🗺️</span> Mode Aventure</h2>
-      <p>Le mode de jeu classique où vous parcourez différents niveaux.</p>
+      <h2><span>🗺️</span>Adventure Mode</h2>
+      <p>The classic game mode where you progress through different levels.</p>
     </div>
     <!-- animation du mode classique -->
     <div class="rules-visual visual-aventure">
@@ -117,8 +117,8 @@ session_start();
   
   <section class="rules-section">
     <div class="rules-text">
-      <h2><span>∞</span> Mode Infini</h2>
-      <p>Dans le mode infini, les défis s'enchaînent sans fin ! Quel sera votre score ?</p>
+      <h2><span>∞</span>Infinity Mode</h2>
+      <p>In endless mode, the challenges keep coming! What will your score be?</p>
     </div>
     <!-- animation du mode infini -->
     <div class="rules-visual visual-infini">
@@ -131,8 +131,8 @@ session_start();
 
   <section class="rules-section">
     <div class="rules-text">
-      <h2><span>✏️</span> Le Concepteur</h2>
-      <p>Un mode de jeu dans lequel vous pouvez créer vos propres niveaux.</p>
+      <h2><span>✏️</span> The Designer</h2>
+      <p>A game mode in which you can create your own levels.</p>
     </div>
     <!-- animation du mode concepteur -->
     <div class="rules-visual visual-concepteur">
@@ -148,8 +148,8 @@ session_start();
 
   <section class="rules-section">
     <div class="rules-text">
-      <h2 class="txt-brouillon"><span>🗑️</span> Mode Brouillon</h2>
-      <p>Un espace de test sans contraintes où vous pouvez expérimenter vos idées.</p>
+      <h2 class="txt-brouillon"><span>🗑️</span>Draft Mode</h2>
+      <p>A testing space without constraints where you can experiment with your ideas.</p>
     </div>
     <!-- animation du mode brouillon -->
     <div class="rules-visual visual-brouillon">
