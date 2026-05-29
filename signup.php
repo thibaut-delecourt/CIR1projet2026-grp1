@@ -83,7 +83,7 @@
 
       <div class="field">
         <label for="email">E-mail address</label>
-        <input type="text" id="email" name="email" placeholder="ton@email.com" required pattern=".*@.*"/>
+        <input type="text" id="email" name="email" placeholder="your@email.com" required pattern=".*@.*"/>
       </div>
 
       <div class="field">

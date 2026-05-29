@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COBRA — Aventure</title>
+    <title>COBRA — Adventure Mode</title>
     <link rel="stylesheet" href="style.css?v=2">
 
     <style>
@@ -444,9 +444,9 @@
     <div class="victory-overlay" id="victoryOverlay">
         <div class="victory-box">
             <div class="victory-title">Victory</div>
-            <div class="victory-subtitle">The snake is successfully linkink the head and the tail !</div>
+            <div class="victory-subtitle">The snake is successfully linking the head and the tail !</div>
             <div class="victory-countdown" id="victoryCountdown">
-                Automatic reinitialisation in 15 second.
+                Automatic reinitialisation in 15 seconds.
             </div>
             <button class="victory-button" onclick="location.reload()">Replay</button>
             <button class="victory-button" onclick="location.href='niveau.php';">Back to the level</button>
@@ -709,15 +709,15 @@
             const countdownElement = document.getElementById("victoryCountdown");
             let secondes = 15;
 
-            countdownElement.textContent = "Réinitialisation automatique dans " + secondes + " secondes.";
+            countdownElement.textContent = "Automatic reinitialisation in " + secondes + " seconds.";
 
             countdownInterval = setInterval(() => {
                 secondes--;
 
                 if (secondes > 1) {
-                    countdownElement.textContent = "Réinitialisation automatique dans " + secondes + " secondes.";
+                    countdownElement.textContent = "Automatic reinitialisation in " + secondes + " seconds.";
                 } else if (secondes === 1) {
-                    countdownElement.textContent = "Réinitialisation automatique dans 1 seconde.";
+                    countdownElement.textContent = "Automatic reinitialisation in 1 second.";
                 } else {
                     clearInterval(countdownInterval);
                     location.reload();

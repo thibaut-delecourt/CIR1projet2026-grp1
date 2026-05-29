@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COBRA — Concepteur</title>
+    <title>COBRA — Designer Mode</title>
     <link rel="stylesheet" href="style.css?v=2">
 
     <style>
@@ -397,16 +397,15 @@
         <div class="victory-box">
             <div class="victory-title">You have created your level</div>
             <div class="victory-subtitle">The snake is successfully linking the head to the tail!</div>
-            <div class="victory-subtitle"> Numbers on the collumn :  <span id="colonne"></span></div>
+            <div class="victory-subtitle"> Numbers on the column :  <span id="colonne"></span></div>
             <div class="victory-subtitle"> Numbers on the row :   <span id="ligne"></span></div>
             <button class="victory-button" onclick="location.href='concepteur.php';">Return to designer</button>
-            <button class="victory-button" onclick="location.href='#';">Validate</button>
-            <button class="victory-button" id="btnPartager" onclick="partagerNiveau()">share my level</button>
+            <button class="victory-button" id="btnPartager" onclick="partagerNiveau()">Share my level</button>
             <div id="share-link-box">
     <input id="share-link-input" type="text" readonly>
     <br>
     <button class="victory-button" style="margin-top:10px;" onclick="copierLien()"> Copy link</button>
-    <span id="copy-confirm"> Copié </span>
+    <span id="copy-confirm"> Copied </span>
 </div>
         </div>
 

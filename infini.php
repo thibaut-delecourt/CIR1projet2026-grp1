@@ -131,7 +131,7 @@ session_start();
         </div>
     </div>
 
-    <a href="index.php" class="btn-back">&larr; home</a>
+    <a href="index.php" class="btn-back">&larr; Home</a>
 
     <main class="page">
         <h1 class="logo">COBRA</h1>
