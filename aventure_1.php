@@ -444,12 +444,12 @@
     <div class="victory-overlay" id="victoryOverlay">
         <div class="victory-box">
             <div class="victory-title">Victory</div>
-            <div class="victory-subtitle">Le serpent relie bien la queue à la tête !</div>
+            <div class="victory-subtitle">The snake is successfully linkink the head and the tail !</div>
             <div class="victory-countdown" id="victoryCountdown">
-                Réinitialisation automatique dans 15 secondes.
+                Automatic reinitialisation in 15 second.
             </div>
-            <button class="victory-button" onclick="location.reload()">Rejouer</button>
-            <button class="victory-button" onclick="location.href='niveau.php';">Retour aux niveaux</button>
+            <button class="victory-button" onclick="location.reload()">Replay</button>
+            <button class="victory-button" onclick="location.href='niveau.php';">Back to the level</button>
         </div>
     </div>
 
