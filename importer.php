@@ -230,7 +230,7 @@ function importerNiveau() {
     victoireDejaAffichee = false;
     document.getElementById("victoryOverlay").classList.remove("show");
     construireGrille();
-    info.textContent = "Niveau importe avec succes (longueur " + sumR + " cases). Bonne chance !";
+    info.textContent = "Level matters successfully (length " + sumR + " boxes). Good luck !";
 }
 
 function reinitialiser() {
