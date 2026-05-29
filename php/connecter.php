@@ -36,7 +36,7 @@ if(isset($_POST["se_connecter"])){
         $conn = NULL;
         echo '
         <script>
-            alert("Connexion au compte réussie");
+            alert("Login succesful");
             window.location.href = "../index.php";
         </script>';
         
@@ -44,7 +44,7 @@ if(isset($_POST["se_connecter"])){
     catch(Exception $e){
         echo '
         <script>
-            alert("Echec de la connexion au compte");
+            alert("Login failed");
         </script>';
 
         die("Erreur : ". $e->getmessage()); 

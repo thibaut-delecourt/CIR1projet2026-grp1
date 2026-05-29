@@ -25,7 +25,7 @@ if(isset($_POST["creer_mon_compte"])){
         $conn = NULL;
         echo '
         <script>
-            alert("Création du compte réussie");
+            alert("Account creation successful");
             window.location.href = "../index.php";
         </script>';
         
@@ -34,7 +34,7 @@ if(isset($_POST["creer_mon_compte"])){
     catch(Exception $e){
         echo '
         <script>
-            alert("Echec de la création du compte");
+            alert("Failed to create account");
         </script>';
 
         die("Erreur : ". $e->getmessage()); 
