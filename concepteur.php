@@ -372,11 +372,11 @@
       </div>
   </div>
 
-    <a href="index.php" class="btn-back">← Accueil</a>
+    <a href="index.php" class="btn-back">← Home</a>
 
     <main class="page">
         <h1 class="logo">COBRA</h1>
-        <p class="logo-sub">Mode Concepteur</p>
+        <p class="logo-sub">Designer Mode</p>
 
         <section class="game-zone">
             <div class="jungle-frame">
@@ -415,7 +415,7 @@
 
 
 
-        <!-- L'import est desormais sur sa page dediee : importer.php (voir l'accueil) -->
+        <!-- L'import est desormais sur sa page dediee : importer.php (voir l'Home) -->
 
     <script>
 
