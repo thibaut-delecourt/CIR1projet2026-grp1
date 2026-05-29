@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COBRA - Mode Infini</title>
+    <title>COBRA - Infinity Mode</title>
     <link rel="icon" type="image/x-icon" href="images/CobraLogo.png">
     <link rel="stylesheet" href="style.css?v=2">
 
@@ -135,28 +135,28 @@ session_start();
 
     <main class="page">
         <h1 class="logo">COBRA</h1>
-        <p class="logo-sub">Mode Infini - g&eacute;n&eacute;ration automatique en C</p>
+        <p class="logo-sub">Infinity Mode - automatic generation in C</p>
 
         <div class="toolbar">
-            <button id="btn-diff-0" class="diff-active" onclick="setDiff(0)">Facile</button>
-            <button id="btn-diff-1" onclick="setDiff(1)">Moyen</button>
-            <button id="btn-diff-2" onclick="setDiff(2)">Difficile</button>
-            <button onclick="nouveauNiveau()">Nouveau niveau</button>
-            <button onclick="montrerSolution()" title="Affiche la solution calcul&eacute;e par le solveur C">Indice (solveur)</button>
-            <button onclick="partagerNiveau()" title="Copie un lien r&eacute;utilisable dans le concepteur">Partager le niveau</button>
+            <button id="btn-diff-0" class="diff-active" onclick="setDiff(0)">Easy</button>
+            <button id="btn-diff-1" onclick="setDiff(1)">medium</button>
+            <button id="btn-diff-2" onclick="setDiff(2)">Difficult</button>
+            <button onclick="nouveauNiveau()">New level</button>
+            <button onclick="montrerSolution()" title="Affiche la solution calcul&eacute;e par le solveur C">Clue (solver)</button>
+            <button onclick="partagerNiveau()" title="Copie un lien r&eacute;utilisable dans le concepteur">Share level</button>
         </div>
 
         <div id="share-link-box">
             <input id="share-link-input" type="text" readonly>
             <br>
             <button class="victory-button" style="margin-top:10px;" onclick="copierLien()">Copier le lien</button>
-            <span id="copy-confirm">Copi&eacute;&nbsp;!</span>
+            <span id="copy-confirm">Copied!</span>
             <p style="color:#fdf6e3; font-size:13px; margin-top:10px;">
-                Colle ce lien dans la case « Coller le lien ici&hellip; » du <a href="concepteur.php" style="color:#f5d76e;">concepteur</a>.
+                Paste this link into the "Paste link here..." box of the<a href="concepteur.php" style="color:#f5d76e;">designer</a>.
             </p>
         </div>
 
-        <div class="info" id="meta">Chargement du premier niveau&hellip;</div>
+        <div class="info" id="meta">Loading the first level…</div>
 
         <section class="game-zone">
             <div class="jungle-frame">
@@ -167,11 +167,11 @@ session_start();
 
     <div class="victory-overlay" id="victoryOverlay">
         <div class="victory-box">
-            <div class="victory-title">VICTOIRE</div>
+            <div class="victory-title">VICTORY</div>
             <p style="color:white; font-size:18px; margin-top:14px;">
-                Le serpent relie bien la queue &agrave; la t&ecirc;te !
+                The snake connects its tail to its head perfectly!
             </p>
-            <button class="victory-button" onclick="nouveauNiveau()">Niveau suivant</button>
+            <button class="victory-button" onclick="nouveauNiveau()">Next level</button>
         </div>
     </div>
 
@@ -212,8 +212,8 @@ async function nouveauNiveau() {
         rowNumbers = data.rows.slice();
         colNumbers = data.cols.slice();
         document.getElementById('meta').textContent =
-            'Longueur du serpent : ' + data.longueur +
-            ' / Difficulté : ' + ['facile','moyen','difficile'][data.difficulte] +
+            'Snake length : ' + data.longueur +
+            ' / Difficulty : ' + ['easy','medium','Difficulty'][data.difficulte] +
             ' / seed : ' + data.seed;
         construireGrille();
     } catch (e) {

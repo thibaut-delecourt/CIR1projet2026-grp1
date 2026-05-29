@@ -44,37 +44,37 @@ session_start();
 
 <main class="page">
   <h1 class="logo">COBRA</h1>
-  <p class="logo-sub">Le jeu de l'éveil</p>
+  <p class="logo-sub">The game of awakening</p>
 
 
 <?php
 if(isset($_SESSION['email'])){
-  echo'<a href="php/deconnexion.php" class="btn-connect">Déconnexion</a>';
+  echo'<a href="php/deconnexion.php" class="btn-connect">Logout</a>';
 }
 else{
-  echo'<a href="login.php" class="btn-connect">Connexion</a>';
+  echo'<a href="login.php" class="btn-connect">Login</a>';
 }
 ?>
-  <a href="rules.php" class="btn-rules-top">📜 Règles</a>
-  <a href="importer.php" class="btn-rules-top" style="left:auto; right:24px;">📥 Importer</a>
+  <a href="rules.php" class="btn-rules-top">📜 Rules</a>
+  <a href="importer.php" class="btn-rules-top" style="left:auto; right:24px;">📥 Import</a>
 
   <div class="cards">
     <a href="Niveau.php" class="card card-aventure">
       <span class="card-icon">🗺️</span>
-      <span class="card-label">Aventure</span>
+      <span class="card-label">Adventure</span>
     </a>
     <a href="infini.php" class="card card-infini">
       <span class="card-icon">∞</span>
-      <span class="card-label">Infini</span>
+      <span class="card-label">Infinity</span>
     </a>
     <a href="concepteur.php" class="card card-concepteur">
       <span class="card-icon">✏️</span>
-      <span class="card-label">Concepteur</span>
+      <span class="card-label">Designer</span>
     </a>
   </div>
   <a href="touches.php" class="card card-touches">
       <span class="card-icon">⌨️​</span>
-      <span class="card-label">Touches</span>
+      <span class="card-label">Keys</span>
     </a>
   </div>
 </main>

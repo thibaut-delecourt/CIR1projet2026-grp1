@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COBRA — Connexion</title>
+  <title>COBRA — Login</title>
   <link rel="stylesheet" href="style.css?v=2">
 </head>
 
@@ -39,32 +39,32 @@
     </div>
   </div>
 
-  <a href="index.php" class="btn-back">← Accueil</a>
+  <a href="index.php" class="btn-back">← Home</a>
 
   <main class="page form-page">
     <div class="form-box">
     <div class="form-title">COBRA</div>
-    <p class="form-hint">Bienvenue, aventurier</p>
+    <p class="form-hint">Welcome, adventurer</p>
 
     <form name="connexion" method="post" action="php/connecter.php">
 
       <div class="field">
-        <label for="email">Adresse e-mail</label>
+        <label for="email">E-mail address</label>
         <input type="text" id="email" name="email" placeholder="ton@email.com" required pattern=".*@.*"/>
       </div>
 
       <div class="field">
-        <label for="password">Mot de passe</label>
+        <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="••••••••" required/>
       </div>
 
 
-      <input Type="submit" name="se_connecter" value="Se connecter" class="btn-submit">
+      <input Type="submit" name="se_connecter" value="Login" class="btn-submit">
 
     </form>
 
       <p class="form-foot">
-        Pas encore de compte ? <a href="signup.php">Créer un compte</a>
+        Don't have an account yet? <a href="signup.php">Create an account</a>
       </p>
     </div>
   

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COBRA — Touches</title>
+  <title>COBRA — Keys</title>
   <link rel="stylesheet" href="style.css?v=2">
   <style>
 .touches-grid {
@@ -170,16 +170,16 @@
         </div>
     </div>
 
-  <a href="index.php" class="btn-back">← Accueil</a>
+  <a href="index.php" class="btn-back">← Home</a>
 
   <main class="page form-page">
     <div class="form-box">
       <div class="form-title">COBRA</div>
-      <p class="form-hint">Comment jouer ?</p>
+      <p class="form-hint">How to play?</p>
 
       <div class="touches-grid">
 
-        <p class="section-label">🖱️ Souris</p>
+        <p class="section-label">🖱️ Mouse</p>
 
       <!-- Clic gauche -->
 <div class="touche-row">
@@ -191,8 +191,8 @@
     </div>
   </div>
   <div class="touche-desc">
-    <span class="touche-action">Clic gauche</span>
-    <span class="touche-detail">Sélectionner / désélectionner une case</span>
+    <span class="touche-action">Left click</span>
+    <span class="touche-detail">Select / deselect a box</span>
   </div>
   <span class="badge-mode badge-normal">Normal</span>
 </div>
@@ -207,10 +207,10 @@
     </div>
   </div>
   <div class="touche-desc">
-    <span class="touche-action">Clic droit</span>
-    <span class="touche-detail">Colorier une case en mode brouillon</span>
+    <span class="touche-action">right click</span>
+    <span class="touche-detail">Color a square in draft mode</span>
   </div>
-  <span class="badge-mode badge-brouillon">Brouillon</span>
+  <span class="badge-mode badge-brouillon">Draft</span>
 </div>
       </div>
     </div>
