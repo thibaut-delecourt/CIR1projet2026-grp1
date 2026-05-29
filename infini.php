@@ -149,7 +149,7 @@ session_start();
         <div id="share-link-box">
             <input id="share-link-input" type="text" readonly>
             <br>
-            <button class="victory-button" style="margin-top:10px;" onclick="copierLien()">Copie the link</button>
+            <button class="victory-button" style="margin-top:10px;" onclick="copierLien()">Copy link</button>
             <span id="copy-confirm">Copied!</span>
             <p style="color:#fdf6e3; font-size:13px; margin-top:10px;">
                 Paste this link into the "Paste link here..." box of the<a href="concepteur.php" style="color:#f5d76e;">designer</a>.
