@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COBRA — Niveau</title>
+    <title>COBRA — Level</title>
     <link rel="stylesheet" href="style.css?v=2">
 
   <style>
@@ -427,45 +427,45 @@
 
      <div class="cards-vertical">
     <a href="aventure_1.php" class="card card-aventure">
-      <span class="niveau">Niveau 1</span>
-      <span class="logo-sub">Pour bien commencer</span>
+      <span class="niveau">Level 1</span>
+      <span class="logo-sub">To take a good start</span>
     </a>
   <a href="aventure_2.php" class="card card-aventure">
-      <span class="niveau">Niveau 2</span>
-      <span class="logo-sub">Le premier défi</span>
+      <span class="niveau">Level 2</span>
+      <span class="logo-sub">The first chalenge</span>
   </a>
   <a href="aventure_3.php" class="card card-aventure">
-      <span class="niveau">Niveau 3</span>
-      <span class="logo-sub">Ne vous mordez pas la queue</span>
+      <span class="niveau">Level 3</span>
+      <span class="logo-sub">Don't bite your tail</span>
   </a>
   <a href="aventure_4.php" class="card card-aventure">
-      <span class="niveau">Niveau 4</span>
-      <span class="logo-sub">Un serpent ne recule jamais</span>
+      <span class="niveau">Level 4</span>
+      <span class="logo-sub">A snake never back down</span>
   </a>
   <a href="aventure_5.php" class="card card-aventure">
-      <span class="niveau">Niveau 5</span>
-      <span class="logo-sub">L'aigle est l'ennemi des serpents</span>
+      <span class="niveau">Level 5</span>
+      <span class="logo-sub">The eagle is the enemy of snakes</span>
   </a>
     <a href="aventure_6.php" class="card card-aventure">
-      <span class="niveau">Niveau 6</span>
-      <span class="logo-sub">Tout les serpents ne sont pas venimeux</span>
+      <span class="niveau">Level 6</span>
+      <span class="logo-sub">All snakes are not venomous</span>
   </a>
  <a href="aventure_7.php" class="card card-aventure">
-      <span class="niveau">Niveau 7</span>
-      <span class="logo-sub">Muer comme un serpent</span>
+      <span class="niveau">Level 7</span>
+      <span class="logo-sub">To shed one's skin like a snake</span>
   </a>
 <a href="aventure_8.php" class="card card-aventure">
-      <span class="niveau">Niveau 8</span>
-      <span class="logo-sub">Les serpents glissent vers leurs objectifs</span>
+      <span class="niveau">Level 8</span>
+      <span class="logo-sub">The snake are slipping to their goal</span>
   </a>
 
   <a href="aventure_9.php" class="card card-aventure">
-      <span class="niveau">Niveau 9</span>
-      <span class="logo-sub">Le serpent perd en appetit avec l'age</span>
+      <span class="niveau">Level 9</span>
+      <span class="logo-sub">The snake loose in apetite with years</span>
   </a>
   <a href="aventure_10.php" class="card card-aventure">
-      <span class="niveau">Niveau 10</span>
-      <span class="logo-sub">Le chemin du serpent</span>
+      <span class="niveau">Level 10</span>
+      <span class="logo-sub">The way of the snake</span>
   </a>
 
   

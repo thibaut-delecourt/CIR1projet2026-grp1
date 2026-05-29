@@ -423,7 +423,7 @@
 
     <main class="page">
         <h1 class="logo">COBRA</h1>
-        <p class="logo-sub">Mode Aventure - Niveau 4</p>
+        <p class="logo-sub">Adventure Mode - Level 4</p>
 
         <section class="game-zone">
             <div class="jungle-frame">
